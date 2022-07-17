@@ -17,7 +17,6 @@ addLayer('Ain',
 
     resetDescription : '解析 ',
 
-
     hotkeys : 
     [
         {
