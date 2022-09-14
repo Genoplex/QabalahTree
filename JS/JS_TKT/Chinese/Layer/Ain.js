@@ -93,9 +93,9 @@ addLayer('Ain',
                     {
                         if(player.Ain.Clickables_2[2][1].gte(1))
                         {
-                            return '(+' + format(player.Ain.Ain_Gain.root(player.Ain.Clickables_2[2][2])) + '^' + format(player.Ain.Clickables_2[2][2]) + ' = +' + format(player.Ain.Ain_Gain) + ' Ain/s)'
+                            return '[(+' + format(player.Ain.Point_Gain_Base) + '×' + format(player.Ain.Point_Gain_Multiply) + ')^' + format(player.Ain.Point_Gain_Exponent) + '= +' + format(player.Ain.Point_Gain_Total) + ' Ain/s]'
                         }
-                        return '(+' + format(player.Ain.Ain_Gain) + ' Ain/s)'
+                        return '(+' + format(player.Ain.Point_Gain_Base) + ' Ain/s)'
                     }
                 ],
                 'blank',
@@ -108,25 +108,23 @@ addLayer('Ain',
     {
         Tab1:
         {
-            'Ain Layers':
+            'Depths':
             {
                 content: function()
                 {
                     var Format = []
                     Format.push('blank')
                     Format.push('h-line','')
-                    Format.push(['row',[['row',[['display-text','<h3>Ain Layer</h3>']],                                      {'width':'200px'}],
-                                        ['row',[['display-text','<h3>Depth</h3>']],                                              {'width':'200px'}],
-                                        ['row',[['display-text','<h3>Effect</h3>']],                                             {'width':'200px'}],
-                                        ['row',[['display-text','<h3>Price</h3>']],                                              {'width':'300px'}]],
+                    Format.push(['row',[['row',[['display-text','<h3>Ain Hierarchy</h3>']],                                                {'width':'200px'}],
+                                        ['row',[['display-text','<h3>Depth</h3>']],                                                        {'width':'200px'}],
+                                        ['row',[['display-text','<h3>Effect</h3>']],                                                       {'width':'200px'}],
+                                        ['row',[['display-text','<h3>Price</h3>']],                                                        {'width':'300px'}]],
                                 {'height':'50px','background-color':'#222222'}])
                     Format.push('h-line','')
 
                     for(var I=1; I<=8; I=I+2)
                     {
-                        if(player.Ain.Clickables_3[4][1].lt(1))
-                        {
-                            if(player.Ain.Clickables_1_Unlock[I])
+                        if(player.Ain.Clickables_1_Unlock[I])
                             Format.push(['row',[['row',[['display-text','<h3>Ain No.' + formatWhole(I) +'</h3>']],                         {'width':'200px'}],
                                                 ['row',[['display-text','<h3>'  + formatWhole(player.Ain.Clickables_1[I][1]) + '</h3>']],  {'width':'200px'}],
                                                 ['row',[['display-text','<h3>+' + format(player.Ain.Clickables_1[I][2]) + '</h3>']],       {'width':'200px'}],
@@ -138,22 +136,6 @@ addLayer('Ain',
                                                 ['row',[['display-text','<h3>+' + format(player.Ain.Clickables_1[I+1][2]) + '</h3>']],     {'width':'200px'}],
                                                 ['row',[['clickable',11+I]],                                                               {'width':'300px'}]],
                                         {'height':'35px','background-color':'#222222'}])
-                        }
-                        if(player.Ain.Clickables_3[4][1].gte(1))
-                        {
-                            if(player.Ain.Clickables_1_Unlock[I])
-                            Format.push(['row',[['row',[['display-text','<h3>Ain No.' + formatWhole(I) +'</h3>']],                         {'width':'200px'}],
-                                                ['row',[['display-text','<h3>'  + formatWhole(player.Ain.Clickables_1[I][1])   + '</h3><br><h4>(+' + formatWhole(player.Ain.Clickables_1[I][1].mul(I).mul(I))       + '%)</h3>']],  {'width':'200px'}],
-                                                ['row',[['display-text','<h3>+' + format(player.Ain.Clickables_1[I][2]) + '</h3>']],       {'width':'200px'}],
-                                                ['row',[['clickable',10+I]],                                                               {'width':'300px'}]],
-                                        {'height':'50px','background-color':'#333333'}])
-                            if(player.Ain.Clickables_1_Unlock[I+1])
-                            Format.push(['row',[['row',[['display-text','<h3>Ain No.' + formatWhole(I+1) + '</h3>']],                      {'width':'200px'}],
-                                                ['row',[['display-text','<h3>'  + formatWhole(player.Ain.Clickables_1[I+1][1]) + '</h3><br><h4>(+' + formatWhole(player.Ain.Clickables_1[I+1][1].mul(I+1).mul(I+1)) + '%)</h3>']],{'width':'200px'}],
-                                                ['row',[['display-text','<h3>+' + format(player.Ain.Clickables_1[I+1][2]) + '</h3>']],     {'width':'200px'}],
-                                                ['row',[['clickable',11+I]],                                                               {'width':'300px'}]],
-                                        {'height':'50px','background-color':'#222222'}])
-                        }
                     }
 
                     Format.push('blank')
@@ -168,9 +150,16 @@ addLayer('Ain',
                     'blank',
                     ['h-line','900px'],
                     'blank',
-                    ['row',[['row',,{'width':'68px'}],['clickable',24],['column',,{'width':'18px'}],['clickable',21],['column',,{'width':'18px'}],['clickable',22],['column',,{'width':'18px'}],['clickable',25],['column',,{'width':'18px'}],['clickable',99]],{}],
                     'blank',
-                    ['row',[['clickable',26],['row',,{'width':'18px'}],['clickable',23],['row',,{'width':'18px'}],['clickable',27]],{}],
+                    'blank',
+                    'blank',
+                    'blank',
+                    ['row',[['column',,{'width':'605px'}],['clickable',99]],{}],
+                    'blank',
+                    ['row',[['column',[['clickable',24],['row',,{'height':'125px'}]],{}],['column',,{'width':'18px'}],['column',[['row',,{'height':'50px'}],['clickable',21]],{}],['column',,{'width':'18px'}],['column',[['row',,{'height':'50px'}],['clickable',22]],{}],['column',,{'width':'18px'}],['column',[['clickable',25],['row',,{'height':'125px'}]],{}]],{}],
+                    ['clickable',23],
+                    'blank',
+                    ['clickable',26],
                 ]
             },
             'Deep Research':
@@ -187,96 +176,66 @@ addLayer('Ain',
                     Format.push('blank')
                     Format.push(['display-text','<h2>Your Research Power(RP) is <h1 style="color:tmp[layer].color; text-shadow: 0px 0px 10px #FFFFFF;">' + format(player.Ain.Deep_Research_Power)])
                     Format.push('blank')
+                    Format.push(['clickable',31])
+                    Format.push('blank')
+                    Format.push('blank')
 
-                    var Upgrades = [
-                         0,
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',318],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',317],['clickable',36], ['clickable',37], ['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',316],['clickable',100],['clickable',32], ['clickable',100],['clickable',38], ['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',321],['clickable',315],['clickable',35], ['clickable',31], ['clickable',33], ['clickable',39], ['clickable',319],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',314],['clickable',100],['clickable',34], ['clickable',100],['clickable',310],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',313],['clickable',312],['clickable',311],['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',320],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                        [0,   ['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100],['clickable',100]],
-                    ]
-                    var Row_1  = ['row',[Upgrades[1][1], ['column',,{'width':'18px'}],Upgrades[1][2], ['column',,{'width':'18px'}],Upgrades[1][3], ['column',,{'width':'18px'}],Upgrades[1][4], ['column',,{'width':'18px'}],Upgrades[1][5], ['column',,{'width':'18px'}],Upgrades[1][6], ['column',,{'width':'18px'}],Upgrades[1][7], ['column',,{'width':'18px'}],Upgrades[1][8], ['column',,{'width':'18px'}],Upgrades[1][9], ['column',,{'width':'18px'}],Upgrades[1][10], ['column',,{'width':'18px'}],Upgrades[1][11]]]
-                    var Row_2  = ['row',[Upgrades[2][1], ['column',,{'width':'18px'}],Upgrades[2][2], ['column',,{'width':'18px'}],Upgrades[2][3], ['column',,{'width':'18px'}],Upgrades[2][4], ['column',,{'width':'18px'}],Upgrades[2][5], ['column',,{'width':'18px'}],Upgrades[2][6], ['column',,{'width':'18px'}],Upgrades[2][7], ['column',,{'width':'18px'}],Upgrades[2][8], ['column',,{'width':'18px'}],Upgrades[2][9], ['column',,{'width':'18px'}],Upgrades[2][10], ['column',,{'width':'18px'}],Upgrades[2][11]]]
-                    var Row_3  = ['row',[Upgrades[3][1], ['column',,{'width':'18px'}],Upgrades[3][2], ['column',,{'width':'18px'}],Upgrades[3][3], ['column',,{'width':'18px'}],Upgrades[3][4], ['column',,{'width':'18px'}],Upgrades[3][5], ['column',,{'width':'18px'}],Upgrades[3][6], ['column',,{'width':'18px'}],Upgrades[3][7], ['column',,{'width':'18px'}],Upgrades[3][8], ['column',,{'width':'18px'}],Upgrades[3][9], ['column',,{'width':'18px'}],Upgrades[3][10], ['column',,{'width':'18px'}],Upgrades[3][11]]]
-                    var Row_4  = ['row',[Upgrades[4][1], ['column',,{'width':'18px'}],Upgrades[4][2], ['column',,{'width':'18px'}],Upgrades[4][3], ['column',,{'width':'18px'}],Upgrades[4][4], ['column',,{'width':'18px'}],Upgrades[4][5], ['column',,{'width':'18px'}],Upgrades[4][6], ['column',,{'width':'18px'}],Upgrades[4][7], ['column',,{'width':'18px'}],Upgrades[4][8], ['column',,{'width':'18px'}],Upgrades[4][9], ['column',,{'width':'18px'}],Upgrades[4][10], ['column',,{'width':'18px'}],Upgrades[4][11]]]
-                    var Row_5  = ['row',[Upgrades[5][1], ['column',,{'width':'18px'}],Upgrades[5][2], ['column',,{'width':'18px'}],Upgrades[5][3], ['column',,{'width':'18px'}],Upgrades[5][4], ['column',,{'width':'18px'}],Upgrades[5][5], ['column',,{'width':'18px'}],Upgrades[5][6], ['column',,{'width':'18px'}],Upgrades[5][7], ['column',,{'width':'18px'}],Upgrades[5][8], ['column',,{'width':'18px'}],Upgrades[5][9], ['column',,{'width':'18px'}],Upgrades[5][10], ['column',,{'width':'18px'}],Upgrades[5][11]]]
-                    var Row_6  = ['row',[Upgrades[6][1], ['column',,{'width':'18px'}],Upgrades[6][2], ['column',,{'width':'18px'}],Upgrades[6][3], ['column',,{'width':'18px'}],Upgrades[6][4], ['column',,{'width':'18px'}],Upgrades[6][5], ['column',,{'width':'18px'}],Upgrades[6][6], ['column',,{'width':'18px'}],Upgrades[6][7], ['column',,{'width':'18px'}],Upgrades[6][8], ['column',,{'width':'18px'}],Upgrades[6][9], ['column',,{'width':'18px'}],Upgrades[6][10], ['column',,{'width':'18px'}],Upgrades[6][11]]]
-                    var Row_7  = ['row',[Upgrades[7][1], ['column',,{'width':'18px'}],Upgrades[7][2], ['column',,{'width':'18px'}],Upgrades[7][3], ['column',,{'width':'18px'}],Upgrades[7][4], ['column',,{'width':'18px'}],Upgrades[7][5], ['column',,{'width':'18px'}],Upgrades[7][6], ['column',,{'width':'18px'}],Upgrades[7][7], ['column',,{'width':'18px'}],Upgrades[7][8], ['column',,{'width':'18px'}],Upgrades[7][9], ['column',,{'width':'18px'}],Upgrades[7][10], ['column',,{'width':'18px'}],Upgrades[7][11]]]
-                    var Row_8  = ['row',[Upgrades[8][1], ['column',,{'width':'18px'}],Upgrades[8][2], ['column',,{'width':'18px'}],Upgrades[8][3], ['column',,{'width':'18px'}],Upgrades[8][4], ['column',,{'width':'18px'}],Upgrades[8][5], ['column',,{'width':'18px'}],Upgrades[8][6], ['column',,{'width':'18px'}],Upgrades[8][7], ['column',,{'width':'18px'}],Upgrades[8][8], ['column',,{'width':'18px'}],Upgrades[8][9], ['column',,{'width':'18px'}],Upgrades[8][10], ['column',,{'width':'18px'}],Upgrades[8][11]]]
-                    var Row_9  = ['row',[Upgrades[9][1], ['column',,{'width':'18px'}],Upgrades[9][2], ['column',,{'width':'18px'}],Upgrades[9][3], ['column',,{'width':'18px'}],Upgrades[9][4], ['column',,{'width':'18px'}],Upgrades[9][5], ['column',,{'width':'18px'}],Upgrades[9][6], ['column',,{'width':'18px'}],Upgrades[9][7], ['column',,{'width':'18px'}],Upgrades[9][8], ['column',,{'width':'18px'}],Upgrades[9][9], ['column',,{'width':'18px'}],Upgrades[9][10], ['column',,{'width':'18px'}],Upgrades[9][11]]]
-                    var Row_10 = ['row',[Upgrades[10][1],['column',,{'width':'18px'}],Upgrades[10][2],['column',,{'width':'18px'}],Upgrades[10][3],['column',,{'width':'18px'}],Upgrades[10][4],['column',,{'width':'18px'}],Upgrades[10][5],['column',,{'width':'18px'}],Upgrades[10][6],['column',,{'width':'18px'}],Upgrades[10][7],['column',,{'width':'18px'}],Upgrades[10][8],['column',,{'width':'18px'}],Upgrades[10][9],['column',,{'width':'18px'}],Upgrades[10][10],['column',,{'width':'18px'}],Upgrades[10][11]]]                   
-                    var Row_11 = ['row',[Upgrades[11][1],['column',,{'width':'18px'}],Upgrades[11][2],['column',,{'width':'18px'}],Upgrades[11][3],['column',,{'width':'18px'}],Upgrades[11][4],['column',,{'width':'18px'}],Upgrades[11][5],['column',,{'width':'18px'}],Upgrades[11][6],['column',,{'width':'18px'}],Upgrades[11][7],['column',,{'width':'18px'}],Upgrades[11][8],['column',,{'width':'18px'}],Upgrades[11][9],['column',,{'width':'18px'}],Upgrades[11][10],['column',,{'width':'18px'}],Upgrades[11][11]]]
+                    if(player.Ain.Deep_Research_Category == 0)
+                    {
+                        Format.push(['row',[['clickable',32]],{'width':'900px'}])
+                    }
 
-                    if(player.Ain.MiniTab3_Shrink == 0)
-                    Format.push(['row',[
-                                       ['column',[
-                                                 ['row',[Upgrades[player.Ain.MiniTab3_Row[1]-1][player.Ain.MiniTab3_Column[1]-1], ['column',,{'width':'18px'}], Upgrades[player.Ain.MiniTab3_Row[1]-1][player.Ain.MiniTab3_Column[1]], ['column',,{'width':'18px'}], Upgrades[player.Ain.MiniTab3_Row[1]-1][player.Ain.MiniTab3_Column[1]+1]]],
-                                                 'blank',
-                                                 ['row',[Upgrades[player.Ain.MiniTab3_Row[1]][player.Ain.MiniTab3_Column[1]-1],   ['column',,{'width':'18px'}], Upgrades[player.Ain.MiniTab3_Row[1]][player.Ain.MiniTab3_Column[1]],   ['column',,{'width':'18px'}], Upgrades[player.Ain.MiniTab3_Row[1]][player.Ain.MiniTab3_Column[1]+1]]],
-                                                 'blank',
-                                                 ['row',[Upgrades[player.Ain.MiniTab3_Row[1]+1][player.Ain.MiniTab3_Column[1]-1], ['column',,{'width':'18px'}], Upgrades[player.Ain.MiniTab3_Row[1]+1][player.Ain.MiniTab3_Column[1]], ['column',,{'width':'18px'}], Upgrades[player.Ain.MiniTab3_Row[1]+1][player.Ain.MiniTab3_Column[1]+1]]]],
-                                       {'width':'580px','height':'580px','border':'3px solid white'}],
-                                       ['column',,{'width':'20px'}],
-                                       ['column',[
-                                                 ['display-text','<h3>Research Slot<br>' + formatWhole(player.Ain.Deep_Research_Number[1]) + ' / ' + formatWhole(player.Ain.Deep_Research_Number[2])],
-                                                 'blank',
-                                                 ['clickable',92],
-                                                 'blank',
-                                                 ['row',[
-                                                        ['clickable',95,],
-                                                        ['column',,{'width':'18px'}],
-                                                        ['clickable',91],
-                                                        ['column',,{'width':'18px'}],
-                                                        ['clickable',93]]],
-                                                 'blank',
-                                                 ['clickable',94],
-                                                 'blank',
-                                                 ['row',[
-                                                        ['clickable',96],
-                                                        ['column',,{'width':'18px'}],
-                                                        ['clickable',97]]],
-                                                 'blank',
-                                                 'blank',
-                                                 'blank',
-                                                 ['display-text','<h3>Mention: Place the mouse over the researches to see the description</h3>']],
-                                       {'width':'250px','height':'550px'}]],{'width':'900px'}])
-                               
-                    if(player.Ain.MiniTab3_Shrink == 1)
-                    Format.push(['row',[
-                                       ['column',[Row_1,'blank',Row_2,'blank',Row_3,'blank',Row_4,'blank',Row_5,'blank',Row_6,'blank',Row_7,'blank',Row_8,'blank',Row_9,'blank',Row_10,'blank',Row_11],
-                                       {'width':'580px','height':'580px','border':'3px solid white'}],
-                                       ['column',,{'width':'20px'}],
-                                       ['column',[
-                                                 ['display-text','<h3>Research Slot<br>' + formatWhole(player.Ain.Deep_Research_Number[1]) + ' / ' + formatWhole(player.Ain.Deep_Research_Number[2])],
-                                                 'blank',
-                                                 ['clickable',92],
-                                                 'blank',
-                                                 ['row',[
-                                                        ['clickable',95,],
-                                                        ['column',,{'width':'18px'}],
-                                                        ['clickable',91],
-                                                        ['column',,{'width':'18px'}],
-                                                        ['clickable',93]]],
-                                                 'blank',
-                                                 ['clickable',94],
-                                                 'blank',
-                                                 ['row',[
-                                                        ['clickable',96],
-                                                        ['column',,{'width':'18px'}],
-                                                        ['clickable',97]]],
-                                                 'blank',
-                                                 'blank',
-                                                 'blank',
-                                                 ['display-text','<h3>Mention: Place the mouse over the researches to see the description</h3>']],
-                                       {'width':'250px','height':'550px'}]],{'width':'900px'}])
-
+                    if(player.Ain.Deep_Research_Category !== 0)
+                    {
+                        if(player.Ain.Deep_Research_Category == 1)
+                        {
+                            Format.push(['row',[['row',[['column',[['clickable',98],
+                                                                   ['column',,{'height':'550px'}]],{}],
+                                                        ['column',[['column',[['column',,{'height':'20px'}],
+                                                                              ['display-text','<h1>Category - Aleph']],{'height':'50px'}],
+                                                                   ['row',[['column',[['column',,{'height':'5px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',44]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'154px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',47]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'0px'}]],{}],
+                                                                           ['column',[['column',,{'height':'48px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',43]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',45]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',46]],{'width':'34px','transform':'translate(-25px,-25px)'}],
+                                                                                      ['column',,{'height':'43px','z-index':'-1'}]],{}],
+                                                                           ['column',[['column',,{'height':'96px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',42]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'160px','z-index':'-1'}],],{}],
+                                                                           ['column',[['column',,{'height':'144px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',41]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'140px','z-index':'-1'}]],{}],
+                                                                           ['column',[['column',,{'height':'192px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',48]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'120px','z-index':'-1'}]],{}],
+                                                                           ['column',[['column',,{'height':'122px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',412]],{'width':'34px','transform':'translate(25px,25px)'}],
+                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',411]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',49]],{'width':'34px'}],
+                                                                                      ['column',,{'height':'118px'}]],{}],
+                                                                           ['column',[['column',,{'height':'84px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',413]],{'width':'49px'}],
+                                                                                      ['column',,{'height':'154px','z-index':'-1'}],
+                                                                                      ['column',[['clickable',410]],{'width':'49px'}],
+                                                                                      ['column',,{'height':'80px','z-index':'-1'}]],{}]],                        
+                                                                   {'height':'500px'}],
+                                                                  ['column',,{'height':'50px'}]],              
+                                                        {'width':'500px'}],
+                                                        ['column',,{'width':'50px'}],
+                                                    ],                          
+                                                {'width':'600px','height':'600px','border':'2px solid white'}],
+                                                ['column',[['display-text',player.Ain.Deep_Research_Text],'blank',['bar','Progress']],{'width':'300px'}],
+                                                ['v-line','600px']],{}])
+                        }
+                    }
                     return Format
                 }
             }
@@ -294,8 +253,11 @@ addLayer('Ain',
         return{
         unlocked                    : true,
 		points                      : new Decimal(10),
+        Point_Gain_Multiply         : new Decimal(0),
+        Point_Gain_Exponent         : new Decimal(0),
+        Point_Gain_Total            : new Decimal(0),
 
-        Ain_Gain                    : new Decimal(0),
+        Point_Gain_Base                    : new Decimal(0),
 
         Self_Shown                  : 0,
 
@@ -324,40 +286,34 @@ addLayer('Ain',
                                         [0, new Decimal(0),new Decimal(0),new Decimal(0)],
                                     ],
 
-        // 1.Level, 2.Effect, 3.Price, 4.Progress, 5.IsResearching
-        Clickables_3                :[0,[0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
-                                        [0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+        // 1.Type(-1:Recycle, >0:Finite), 2.Level, 3.Effect, 4.Price, 5.Progress, 6.IsResearching
+        Clickables_3                :[0,[0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
+                                        [0, 0, new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),0],
                                     ],
         
         // 1.New, 2.Old
         Refactor                    :[0,new Decimal(1),new Decimal(1)],
 
-        MiniTab3_Shown              : 0,
-        MiniTab3_Shrink             : 0,
-        MiniTab3_Row                : [0,6,2,10],    //1.Shown, 2.Up,   3.Bottom
-        MiniTab3_Column             : [0,6,2,10],    //1.Shown, 2.Left, 3.Right
+        Deep_Research_Category      : 0,
+        Deep_Research_Researching   : 0,
         Deep_Research_Inject        : new Decimal(0),
         Deep_Research_Power         : new Decimal(0),
-        Deep_Research_Number        : [0,0,1],      //1.Researching, 2.Ceil
+        Deep_Research_Gain          : new Decimal(0),
+
+        // 1.New 2.Old
+        Deep_Research_Text          : '<br>',
+        Deep_Research_Bar           : [0, new Decimal(0), new Decimal(0)]
         }
     },
         
@@ -382,17 +338,15 @@ addLayer('Ain',
             player.Ain.Clickables_1_Unlock[I] = 1
         }
 
-        // Research 购买项
-        player.Ain.Clickables_3[2][2]  = new Decimal(player.Ain.Clickables_3[2][1].mul(0.125)).add(1)
-        player.Ain.Clickables_3[2][3]  = new Decimal(100  ).mul(new Decimal(1.5  ).pow(player.Ain.Clickables_3[2][1].add(1)))
-        player.Ain.Clickables_3[3][2]  = new Decimal(0.1  ).mul(player.Ain.Clickables_3[3][1]).add(1)
-        player.Ain.Clickables_3[3][3]  = new Decimal(100  ).mul(new Decimal(2.5  ).pow(player.Ain.Clickables_3[3][1].add(1)))
-        player.Ain.Clickables_3[4][3]  = new Decimal(50000)
-        player.Ain.Clickables_3[5][2]  = player.Ain.Clickables_3[5][1].add(1).mul(2).log(Math.E).add(1).sub(0.69314)
-        player.Ain.Clickables_3[5][3]  = new Decimal(1.25 ).pow(player.Ain.Clickables_3[5][1].add(1)).mul(100)
-        player.Ain.Clickables_3[6][2]  = player.Ain.Clickables_3[6][1].add(8).mul(5).log(Math.E).add(1).sub(3.68887)
-        player.Ain.Clickables_3[6][3]  = new Decimal(50000).mul(new Decimal(5    ).pow(player.Ain.Clickables_3[6][1]))
-        player.Ain.Clickables_3[15][3] = new Decimal(10000).mul(new Decimal(1000 ).pow(player.Ain.Clickables_3[15][1]))
+        // Ain 高研究数量
+        player.Ain.Clickables_3[1][1] = -1
+        player.Ain.Clickables_3[13][1] = 1
+
+        // Ain 高研究购买项
+        player.Ain.Clickables_3[1][3]  = new Decimal(player.Ain.Clickables_3[1][2].mul(0.125)).add(1)
+        player.Ain.Clickables_3[1][4]  = new Decimal(100  ).mul(new Decimal(1.5  ).pow(player.Ain.Clickables_3[1][2].add(1)))
+        player.Ain.Clickables_3[2][4]  = new Decimal(1000000  )
+        player.Ain.Clickables_3[13][4]  = new Decimal(1000000  )
         
         // Refactor 购买项
         player.Ain.Refactor[1] = new Decimal(1)
@@ -402,15 +356,13 @@ addLayer('Ain',
             Levels = Levels.add(player.Ain.Clickables_1[I][1].mul(new Decimal(I).pow(3)))
         }
         player.Ain.Refactor[1] = new Decimal(1).add(Levels.mul(0.01))
-        player.Ain.Refactor[1] = player.Ain.Refactor[1].mul(player.Ain.Clickables_3[3][2])
-        
 
         // Ain 研究购买项
         player.Ain.Clickables_2[1][2] = player.Ain.Clickables_2[1][1].add(2.5).log(1.5).sub(2.2598).add(1)
-        player.Ain.Clickables_2[1][3] = new Decimal(Math.E).pow(player.Ain.Clickables_2[1][1].pow(1.25)).mul(5000)
+        player.Ain.Clickables_2[1][3] = new Decimal(Math.E).pow(player.Ain.Clickables_2[1][1].pow(1.25)).mul(2500)
         player.Ain.Clickables_2[2][2] = new Decimal(2     ).sub(new Decimal(1).div(new Decimal(1.1).pow(player.Ain.Clickables_2[2][1])))
-        player.Ain.Clickables_2[2][3] = new Decimal(Math.E).pow(player.Ain.Clickables_2[2][1].pow(1.75)).mul(2500)
-        player.Ain.Clickables_2[3][2] = new Decimal(0.25  ).add(new Decimal(0.75).div(new Decimal(1.025).pow(player.Ain.Clickables_2[3][1]))).div(player.Ain.Clickables_3[6][2])
+        player.Ain.Clickables_2[2][3] = new Decimal(Math.E).pow(player.Ain.Clickables_2[2][1].pow(1.5)).mul(1000)
+        player.Ain.Clickables_2[3][2] = new Decimal(0.25  ).add(new Decimal(0.75).div(new Decimal(1.025).pow(player.Ain.Clickables_2[3][1])))
         player.Ain.Clickables_2[3][3] = player.Ain.Clickables_2[3][1].add(1).pow(1.25).div(4).mul(4000)
 
         // Ain 本体层级
@@ -418,11 +370,6 @@ addLayer('Ain',
         {
             // Ain 效果
             player.Ain.Clickables_1[I][2] = player.Ain.Clickables_1[I][1].mul(new Decimal(I).pow(4))
-            player.Ain.Clickables_1[I][2] = player.Ain.Clickables_1[I][2].mul(player.Ain.Clickables_2[1][2])
-            player.Ain.Clickables_1[I][2] = player.Ain.Clickables_1[I][2].mul(player.Ain.Clickables_3[2][2])
-            player.Ain.Clickables_1[I][2] = player.Ain.Clickables_1[I][2].mul(player.Ain.Refactor[2])
-            if(player.Ain.Clickables_3[4][1].gte(1)) player.Ain.Clickables_1[I][2] = player.Ain.Clickables_1[I][2].mul(player.Ain.Clickables_1[I][1].mul(I).mul(I).mul(0.01).add(1))
-
             // Ain 价格
             player.Ain.Clickables_1[I][3] = new Decimal(Math.E).pow(new Decimal(0.25).mul(player.Ain.Clickables_1[I][1])).mul(10)  .mul(player.Ain.Clickables_2[3][2]).ceil()
             if(player.Ain.Clickables_1[I][1].lt(0))  player.Ain.Clickables_1[I][1] = new Decimal(0)
@@ -455,47 +402,87 @@ addLayer('Ain',
         }
 
         // Ain 获得
-        player.Ain.Ain_Gain = new Decimal(0)
+        player.Ain.Point_Gain_Multiply = new Decimal(1)
+        player.Ain.Point_Gain_Multiply = player.Ain.Point_Gain_Multiply.mul(player.Ain.Clickables_2[1][2])
+        player.Ain.Point_Gain_Multiply = player.Ain.Point_Gain_Multiply.mul(player.Ain.Refactor[2])
+        player.Ain.Point_Gain_Multiply = player.Ain.Point_Gain_Multiply.mul(player.Ain.Clickables_3[1][3])
+        player.Ain.Point_Gain_Exponent = new Decimal(1)
+        player.Ain.Point_Gain_Exponent = player.Ain.Point_Gain_Exponent.mul(player.Ain.Clickables_2[2][2])
+        player.Ain.Point_Gain_Base = new Decimal(0)
         for(var I=1; I<=8; I++)
         {
-            player.Ain.Ain_Gain = player.Ain.Ain_Gain.add(player.Ain.Clickables_1[I][2])
+            player.Ain.Point_Gain_Base = player.Ain.Point_Gain_Base.add(player.Ain.Clickables_1[I][2])
         }
-        player.Ain.Ain_Gain = player.Ain.Ain_Gain.pow(player.Ain.Clickables_2[2][2])
-        //player.Ain.Ain_Gain = new Decimal(0)
-        player.Ain.points   = player.Ain.points.add((player.Ain.Ain_Gain).mul(diff))
+        player.Ain.Point_Gain_Total = player.Ain.Point_Gain_Base.mul(player.Ain.Point_Gain_Multiply)
+        player.Ain.Point_Gain_Total = player.Ain.Point_Gain_Total.pow(player.Ain.Point_Gain_Exponent)
+        player.Ain.points   = player.Ain.points.add((player.Ain.Point_Gain_Total).mul(diff))
 
         // 计算研究强度
-        player.Ain.Deep_Research_Power = player.Ain.Deep_Research_Inject.add(1).log(2).mul(player.Ain.Clickables_3[5][2])
-        
-        // 计算研究槽位
-        player.Ain.Deep_Research_Number[2] = new Decimal(1)
-        player.Ain.Deep_Research_Number[2] = player.Ain.Deep_Research_Number[2].add(player.Ain.Clickables_3[15][1])
+        player.Ain.Deep_Research_Power = player.Ain.Deep_Research_Inject.add(1).log(2)
+        player.Ain.Deep_Research_Gain  = player.Ain.points.add(player.Ain.Deep_Research_Inject).add(1).log(2).sub(player.Ain.Deep_Research_Power)
+        if(player.Ain.Deep_Research_Gain.lt(0)) player.Ain.Deep_Research_Gain = new Decimal(0)
 
         // 计算研究
-        for(var I=1; I<=21; I++)
+        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
         {
-            if(player.Ain.Clickables_3[I][5] == 1)
+            if(player.Ain.Clickables_3[I][6] == 1)
             {
-                player.Ain.Clickables_3[I][4] = player.Ain.Clickables_3[I][4].add(player.Ain.Deep_Research_Power.mul(diff))
-                if(player.Ain.Clickables_3[I][4].gte(player.Ain.Clickables_3[I][3]))
+                player.Ain.Clickables_3[I][5] = player.Ain.Clickables_3[I][5].add(player.Ain.Deep_Research_Power.mul(diff))
+                if(player.Ain.Clickables_3[I][5].gte(player.Ain.Clickables_3[I][4]))
                 {
-                    player.Ain.Clickables_3[I][1] = player.Ain.Clickables_3[I][1].add(1)
-                    player.Ain.Clickables_3[I][4] = new Decimal(0)
-                }
-
-                if(player.Ain.Clickables_3[4][1].gte(1)&&player.Ain.Clickables_3[4][5] == 1)
-                {
-                    player.Ain.Clickables_3[4][5] = 0
-                    player.Ain.Clickables_3[4][4] = new Decimal(0)
-                    player.Ain.Deep_Research_Number[1] -= 1
+                    player.Ain.Clickables_3[I][2] = player.Ain.Clickables_3[I][2].add(1)
+                    player.Ain.Clickables_3[I][5] = new Decimal(0)
                 }
             }
         }
+
+        if(document.getElementById('clickable-Ain-41')  != null) document.getElementById('clickable-Ain-41').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A1]</p><br><h1>Spring Up</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[1][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>Multiply Ain production<br><br>×' + format(player.Ain.Clickables_3[1][3]) + '</h2><br>'}
+        if(document.getElementById('clickable-Ain-42')  != null) document.getElementById('clickable-Ain-42').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A2]</p><br><h1>Refactor EX</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[2][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>Multiply<br>[Refactor] Effect<br><br>×' + format(player.Ain.Clickables_3[2][3]) + '</h2><br>'}
+        if(document.getElementById('clickable-Ain-43')  != null) document.getElementById('clickable-Ain-43').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A3]</p><br><h1>Depth Effect</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[4][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Depth of Ain Hierarchy increase its production<br>'}
+        if(document.getElementById('clickable-Ain-44')  != null) document.getElementById('clickable-Ain-44').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A4]</p><br><h1>Depth Effect</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[4][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Depth of Ain Hierarchy increase its production<br>'}
+        if(document.getElementById('clickable-Ain-45')  != null) document.getElementById('clickable-Ain-45').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A5]'}
+        if(document.getElementById('clickable-Ain-46')  != null) document.getElementById('clickable-Ain-46').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A6]'}
+        if(document.getElementById('clickable-Ain-47')  != null) document.getElementById('clickable-Ain-47').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A7]</p><br><h1>Analyse</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[4][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Unlock new<br>features<br>'}
+        if(document.getElementById('clickable-Ain-48')  != null) document.getElementById('clickable-Ain-48').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A8]</p><br><h1>Note</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[8][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>Multiply RP production<br><br>×' + format(player.Ain.Clickables_3[8][3]) + '</h2><br>'}
+        if(document.getElementById('clickable-Ain-49')  != null) document.getElementById('clickable-Ain-49').onmouseover = function(e){   player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A9]'}
+        if(document.getElementById('clickable-Ain-410') != null) document.getElementById('clickable-Ain-410').onmouseover = function(e){  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A10]</p><br><h1>Abyss</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[13][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Unlock new<br>features<br>'}
+        if(document.getElementById('clickable-Ain-411') != null) document.getElementById('clickable-Ain-411').onmouseover = function(e){  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A11]'}
+        if(document.getElementById('clickable-Ain-412') != null) document.getElementById('clickable-Ain-412').onmouseover = function(e){  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A12]'}
+        if(document.getElementById('clickable-Ain-413') != null) document.getElementById('clickable-Ain-413').onmouseover = function(e){  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A13]</p><br><h1>Resting No Allowed</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[13][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>RP will multiply<br>Ain production if not researching<br><br>×' + format(player.Ain.Clickables_3[13][3]) + '</h2><br>'}
     },
 
     doReset :  function(Resetting_Layer)
     {
         
+    },
+
+    bars:
+    {
+        Progress: {
+            fillStyle : {'background-color' : "#006600"},
+            baseStyle : {'background-color' : "black"},
+            textStyle : {'color': '#white'},
+            direction: RIGHT,
+            width: 280,
+            height: 30,
+            progress : function()
+            {
+                switch(player.Ain.Deep_Research_Text.substring(33,36))
+                {
+                    case 'A1]' : return player.Ain.Clickables_3[1][5].div(player.Ain.Clickables_3[1][4]) ;break
+                    case 'A2]' : return player.Ain.Clickables_3[2][5].div(player.Ain.Clickables_3[2][4]) ;break
+                }
+            },
+            display : function()
+            {
+                switch(player.Ain.Deep_Research_Text.substring(33,36))
+                {
+                    case 'A1]' : return format(player.Ain.Clickables_3[1][5]) + ' / ' + format(player.Ain.Clickables_3[1][4]) ;break
+                    case 'A2]' : return format(player.Ain.Clickables_3[2][5]) + ' / ' + format(player.Ain.Clickables_3[2][4]) ;break
+                }
+            },
+            unlocked: true,
+        },
     },
 
     clickables :
@@ -894,7 +881,7 @@ addLayer('Ain',
             },
             display :  function()
             {
-                Description = '<h3>Reduce Layer Price</h3>'
+                Description = '<h3>Reduce Hierarchy Price</h3>'
                 Effect      = '<h2>÷' + format(new Decimal(1).div(player.Ain.Clickables_2[3][2])) + '</h2>'
                 Price       = '<h2>' + format(player.Ain.Clickables_2[3][3]) + ' Ain</h2>'
                 if(player.Ain.Clickables_2[3][1].gte(320)) Price = '<h2>Can\'t get more</h2>'
@@ -1037,16 +1024,16 @@ addLayer('Ain',
             },
             display :  function()
             {
-                return '<h3>Unlock new features</h3><br><h2>-----------<br>5.00e9 Ain'
+                return '<h3>Unlock new features</h3><br><h2>-----------<br>1.00e10 Ain'
             },
-            branches : [24,23],
+            branches : [23],
             canClick :  function()
             {
-                return (player.Ain.points.gte(5e9)&&(player.Ain.Clickables_2[6][1].lt(1)))
+                return (player.Ain.points.gte(1e10)&&(player.Ain.Clickables_2[6][1].lt(1)))
             },
             onClick :  function()
             {
-                player.Ain.points             = player.Ain.points.sub(5e9)
+                player.Ain.points             = player.Ain.points.sub(1e10)
                 player.Ain.Clickables_2[6][1] = new Decimal(1)
                 player.Ain.MiniTab3_Shown     = 1
             },
@@ -1064,7 +1051,7 @@ addLayer('Ain',
                     Style['color']            = 'white'
                     Style['background-color'] = '#005000'
                 }
-                else if(player.Ain.points.gte(5e9))
+                else if(player.Ain.points.gte(1e10))
                 {
                     Style['border']           = '2px solid white'
                     Style['color']            = 'white'
@@ -1073,53 +1060,22 @@ addLayer('Ain',
                 return Style
             }
         },
-        27:
-        {
-            title :  function()
-            {
-                return ''
-            },
-            display :  function()
-            {
-                return ''
-            },
-            branches : [25,23],
-            canClick :  function()
-            {
-                return false
-            },
-            onClick :  function()
-            {
-
-            },
-            style :  function()
-            {
-                Style = {}
-                Style['width']            = '150px'
-                Style['height']           = '150px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid #666666'
-                Style['color']            = '#666666'
-                return Style
-            }
-        },
 
         31:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Research Power<br>-----------'
+                return 'Ain Inject<br>-----------------------------'
             },
             display :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                var Power = '<h2>+' + format(player.Ain.Deep_Research_Power) + '</h2>'
-                return Power
+                var Description = '<h3>Enhance power but *SPEND ALL AIN*</h3>'
+                var Power       = '<h2>+' + format(player.Ain.Deep_Research_Gain) + '</h2>'
+                return Description + '<br>' + Power
             },
             tooltip :  function()
             {
-                return 'Transform Ain into Research Power(RP)<br>*SPEND ALL AIN*<br><br>' + 'You have injected ' + format(player.Ain.Deep_Research_Inject) + ' Ain'
+                return 'You have injected ' + format(player.Ain.Deep_Research_Inject) + ' Ain'
             },
             canClick :  function()
             {
@@ -1133,850 +1089,693 @@ addLayer('Ain',
             style :  function()
             {
                 Style = {}
-                Style['width']            = '150px'
-                Style['height']           = '150px'
+                Style['width']            = '350px'
+                Style['height']           = '100px'
                 Style['background-color']     = 'black'
                 Style['border']               = '2px solid white'
                 Style['color']                = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
                 return Style
             }
         },
+
         32:
         {
-            title : function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Spring up<br>Lv ' + formatWhole(player.Ain.Clickables_3[2][1]) + '<br>-----------'
-            },
-            display :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                Price = '<h2>' + format(player.Ain.Clickables_3[2][4].div(player.Ain.Clickables_3[2][3]).mul(100)) + '%</h2>'
-                return Price
-            },
-            tooltip :  function()
-            {
-                return 'Multiply Ain Gain From Layer<br>×' + format(player.Ain.Clickables_3[2][2]) + '<br><br>Process:<br>' + format(player.Ain.Clickables_3[2][4]) + ' RP<br>' + format(player.Ain.Clickables_3[2][3]) + ' RP'
-            },
+            title : '<p style="font-family:Times New Roman; transform:scale(5,5) translate(0,1px)"> א ',
             canClick :  function()
             {
-                if(player.Ain.Clickables_3[2][5] == 0) return player.Ain.Deep_Research_Number[1] <  player.Ain.Deep_Research_Number[2]
-                if(player.Ain.Clickables_3[2][5] == 1) return player.Ain.Deep_Research_Number[1] <= player.Ain.Deep_Research_Number[2]
+                return true
             },
-            onClick :  function()
+            onClick : function()
             {
-                switch(player.Ain.Clickables_3[2][5])
-                {
-                    case 0:
-                    {
-                        player.Ain.Clickables_3[2][5]      = 1
-                        player.Ain.Deep_Research_Number[1] += 1
-                        break;
-                    }
-                    case 1:
-                    {
-                        player.Ain.Clickables_3[2][5]      = 0
-                        player.Ain.Deep_Research_Number[1] -= 1
-
-                        break;
-                    }
-                }
+                player.Ain.Deep_Research_Category = 1
             },
-            branches : [31],
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[2][4].div(player.Ain.Clickables_3[2][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[2][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '150px'
-                Style['height']           = '150px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']        = '30px'
-                    Style['height']       = '30px'
-                }
-                if(player.Ain.Clickables_3[2][5] == 1)
-                {
-                    Style['border']       = '2px solid yellow'
-                }
+                Style['width']                = '200px'
+                Style['height']               = '200px'
+                Style['background-color']     = 'rgba(0,0,0,0)'
+                Style['border']               = '2px solid white'
+                Style['color']                = 'white'
                 return Style
             }
         },
-        33:
+
+        41:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Refactor EX<br>Lv ' + formatWhole(player.Ain.Clickables_3[3][1]) + '<br>-----------'
-            },
-            display :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                Price = '<h2>' + format(player.Ain.Clickables_3[3][4].div(player.Ain.Clickables_3[3][3]).mul(100)) + '%</h2>'
-                return Price
-            },
-            tooltip :  function()
-            {
-                return 'Multiply [Refactor] Effect<br>×' + format(player.Ain.Clickables_3[3][2]) +'<br><br>Process:<br>' + format(player.Ain.Clickables_3[3][4]) + ' RP<br>' + format(player.Ain.Clickables_3[3][3]) + ' RP'
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A1</p>' 
             },
             canClick :  function()
             {
-                if(player.Ain.Clickables_3[3][5] == 0) return player.Ain.Deep_Research_Number[1] <  player.Ain.Deep_Research_Number[2]
-                if(player.Ain.Clickables_3[3][5] == 1) return player.Ain.Deep_Research_Number[1] <= player.Ain.Deep_Research_Number[2]
+                return true
             },
             onClick :  function()
             {
-                switch(player.Ain.Clickables_3[3][5])
+                switch(player.Ain.Clickables_3[1][6])
                 {
                     case 0:
                     {
-                        player.Ain.Clickables_3[3][5]      = 1
-                        player.Ain.Deep_Research_Number[1] += 1
-                        break;
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[1][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
                     }
                     case 1:
                     {
-                        player.Ain.Clickables_3[3][5]      = 0
-                        player.Ain.Deep_Research_Number[1] -= 1
-
-                        break;
+                        player.Ain.Clickables_3[1][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
                     }
                 }
             },
-            branches : [31],
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[3][4].div(player.Ain.Clickables_3[3][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[3][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '150px'
-                Style['height']           = '150px'
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
                 Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                if(player.Ain.Clickables_3[3][5] == 1)
+                if(player.Ain.Clickables_3[1][6] == 1)
                 {
                     Style['border']       = '2px solid yellow'
                 }
+                Style['color']            = 'white'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '100'
                 return Style
             }
         },
-        34:
+        42:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Deep Mining<br>-----------'
-            },
-            display :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                var Price = '<h2>' + format(player.Ain.Clickables_3[4][4].div(player.Ain.Clickables_3[4][3]).mul(100)) + '%</h2>'
-                if(player.Ain.Clickables_3[4][1].gte(1)) Price = '<h3>Research Done<br>(100%)'
-                return Price
-            },
-            tooltip :  function()
-            {
-                if(player.Ain.Clickables_3[4][1].gte(1)) return 'Layer\'s Depth Increase Ain Gain'
-                return 'Layer\'s Depth Increase Ain Gain<br><br>Process:<br>' + format(player.Ain.Clickables_3[4][4]) + ' RP<br>' + format(player.Ain.Clickables_3[4][3]) + ' RP'
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A2</p>' 
             },
             canClick :  function()
             {
-                if(player.Ain.Clickables_3[4][1].gte(1)) return false
-                if(player.Ain.Clickables_3[4][5] == 0)   return player.Ain.Deep_Research_Number[1] <  player.Ain.Deep_Research_Number[2]
-                if(player.Ain.Clickables_3[4][5] == 1)   return player.Ain.Deep_Research_Number[1] <= player.Ain.Deep_Research_Number[2]
+                return player.Ain.Clickables_3[1][2].gte(1)
             },
             onClick :  function()
             {
-                switch(player.Ain.Clickables_3[4][5])
+                switch(player.Ain.Clickables_3[2][6])
                 {
                     case 0:
                     {
-                        player.Ain.Clickables_3[4][5]      = 1
-                        player.Ain.Deep_Research_Number[1] += 1
-                        break;
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[2][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
                     }
                     case 1:
                     {
-                        player.Ain.Clickables_3[4][5]      = 0
-                        player.Ain.Deep_Research_Number[1] -= 1
-
-                        break;
+                        player.Ain.Clickables_3[2][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
                     }
                 }
             },
-            branches : [31],
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[4][4].div(player.Ain.Clickables_3[4][3]).mul(100)
                 Style = {}
-                if(player.Ain.Clickables_3[4][1].lt(1))
-                {
-                    Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                }
-                Style['width']            = '150px'
-                Style['height']           = '150px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                if(player.Ain.Clickables_3[4][1].gte(1))
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '99'
+                if(player.Ain.Clickables_3[1][2].gte(1))
                 {
                     Style['border']           = '2px solid white'
                     Style['color']            = 'white'
-                    Style['background-color'] = '#005000'
                 }
-                if(player.Ain.Clickables_3[4][5] == 1)
+                if(player.Ain.Clickables_3[2][6] == 1)
                 {
                     Style['border']       = '2px solid yellow'
+                    Style['z-index']          = '200'
                 }
                 return Style
             }
         },
-        35:
+        43:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Study<br>Lv ' + formatWhole(player.Ain.Clickables_3[5][1]) + '<br>-----------'
-            },
-            display :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                Price = '<h2>' + format(player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)) + '%</h2>'
-                return Price
-            },
-            tooltip:  function()
-            {
-                return 'Multiply Research Power(RP)<br>×' + format(player.Ain.Clickables_3[5][2]) + '<br><br>Process:<br>' + format(player.Ain.Clickables_3[5][4]) + ' RP<br>' + format(player.Ain.Clickables_3[5][3]) + ' RP'
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A3</p>' 
             },
             canClick :  function()
             {
-                if(player.Ain.Clickables_3[5][5] == 0) return player.Ain.Deep_Research_Number[1] <  player.Ain.Deep_Research_Number[2]
-                if(player.Ain.Clickables_3[5][5] == 1) return player.Ain.Deep_Research_Number[1] <= player.Ain.Deep_Research_Number[2]
+                return true
             },
             onClick :  function()
             {
-                switch(player.Ain.Clickables_3[5][5])
+                switch(player.Ain.Clickables_3[3][6])
                 {
                     case 0:
                     {
-                        player.Ain.Clickables_3[5][5]      = 1
-                        player.Ain.Deep_Research_Number[1] += 1
-                        break;
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[3][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
                     }
                     case 1:
                     {
-                        player.Ain.Clickables_3[5][5]      = 0
-                        player.Ain.Deep_Research_Number[1] -= 1
-
-                        break;
+                        player.Ain.Clickables_3[3][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
                     }
                 }
             },
-            branches : [31],
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                Style['width']            = '150px'
-                Style['height']           = '150px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                if(player.Ain.Clickables_3[5][5] == 1)
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '98'
+                if(player.Ain.Clickables_3[3][6] == 1)
                 {
                     Style['border']       = '2px solid yellow'
+                }
+                if(player.Ain.Clickables_3[2][2].gt(0))
+                {
+                    Style['border']           = '2px solid white'
+                    Style['color']            = 'white'
                 }
                 return Style
             }
         },
-        36:
+        44:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Research Note<br>Lv' + formatWhole(player.Ain.Clickables_3[6][1]) + '<br>-----------'
-            },
-            display :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                Price = '<h2>' + format(player.Ain.Clickables_3[6][4].div(player.Ain.Clickables_3[6][3]).mul(100)) + '%</h2>'
-                return Price
-            },
-            tooltip :  function()
-            {
-                return 'Increase The Limit Of [Knowledge]<br>×' + format(player.Ain.Clickables_3[6][2]) + '<br><br>Process:<br>' + format(player.Ain.Clickables_3[6][4]) + ' RP<br>' + format(player.Ain.Clickables_3[6][3]) + ' RP'
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A4</p>' 
             },
             canClick :  function()
             {
-                if(player.Ain.Clickables_3[2][1].lte(0)) return false
-                if(player.Ain.Clickables_3[6][5] == 0) return player.Ain.Deep_Research_Number[1] <  player.Ain.Deep_Research_Number[2]
-                if(player.Ain.Clickables_3[6][5] == 1) return player.Ain.Deep_Research_Number[1] <= player.Ain.Deep_Research_Number[2]
+                return true
             },
             onClick :  function()
             {
-                switch(player.Ain.Clickables_3[6][5])
+                switch(player.Ain.Clickables_3[4][6])
                 {
                     case 0:
                     {
-                        player.Ain.Clickables_3[6][5]      = 1
-                        player.Ain.Deep_Research_Number[1] += 1
-                        break;
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[4][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
                     }
                     case 1:
                     {
-                        player.Ain.Clickables_3[6][5]      = 0
-                        player.Ain.Deep_Research_Number[1] -= 1
-
-                        break;
+                        player.Ain.Clickables_3[4][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
                     }
                 }
             },
-            branches : function()
-            {
-                if(player.Ain.Clickables_3[2][1].gte(1)) return [32]
-            },
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[6][4].div(player.Ain.Clickables_3[6][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[6][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '150px'
-                Style['height']           = '150px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                if(player.Ain.Clickables_3[6][5] == 1)
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[4][6] == 1)
                 {
                     Style['border']       = '2px solid yellow'
                 }
-                if(player.Ain.Clickables_3[2][1].lte(0))
-                {
-                    Style['opacity']      = '0'
-                }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '97'
                 return Style
             }
         },
-        37:
+        45:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [36],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        38:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [39],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        39:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [33],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        310:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [39],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        311:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [312],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        312:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [34],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        313:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [312],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[13][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        314:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [315],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        315:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Slot Expand<br>Lv ' + formatWhole(player.Ain.Clickables_3[15][1]) + '<br>-----------'
-            },
-            display :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                Price = '<h2>' + format(player.Ain.Clickables_3[15][4].div(player.Ain.Clickables_3[15][3]).mul(100)) + '%</h2>'
-                return Price
-            },
-            tooltip :  function()
-            {
-                return 'Get More<br>Research Slot<br>+' + formatWhole(player.Ain.Clickables_3[15][2]) + '<br><br>Process:<br>' + format(player.Ain.Clickables_3[15][4]) + ' RP<br>' + format(player.Ain.Clickables_3[15][3]) + ' RP'
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A5</p>' 
             },
             canClick :  function()
             {
-                if(player.Ain.Clickables_3[5][1].lte(0)) return false
-                if(player.Ain.Clickables_3[15][5] == 0) return player.Ain.Deep_Research_Number[1] <  player.Ain.Deep_Research_Number[2]
-                if(player.Ain.Clickables_3[15][5] == 1) return player.Ain.Deep_Research_Number[1] <= player.Ain.Deep_Research_Number[2]
+                return true
             },
             onClick :  function()
             {
-                switch(player.Ain.Clickables_3[15][5])
+                switch(player.Ain.Clickables_3[5][6])
                 {
                     case 0:
                     {
-                        player.Ain.Clickables_3[15][5]      = 1
-                        player.Ain.Deep_Research_Number[1] += 1
-                        break;
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[5][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
                     }
                     case 1:
                     {
-                        player.Ain.Clickables_3[15][5]      = 0
-                        player.Ain.Deep_Research_Number[1] -= 1
-
-                        break;
+                        player.Ain.Clickables_3[5][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
                     }
                 }
             },
-            branches : function()
-            {
-                if(player.Ain.Clickables_3[5][1].gte(1)) return [35]
-            },
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[15][4].div(player.Ain.Clickables_3[15][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                Style['width']            = '150px'
-                Style['height']           = '150px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                if(player.Ain.Clickables_3[15][5] == 1)
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[5][6] == 1)
                 {
                     Style['border']       = '2px solid yellow'
                 }
-                if(player.Ain.Clickables_3[5][1].lte(0))
-                {
-                    Style['opacity']      = '0'
-                }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '98'
                 return Style
             }
         },
-        316:
+        46:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [315],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        317:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
-            },
-            branches : [36],
-            style :  function()
-            {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
-                Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                return Style
-            }
-        },
-        318:
-        {
-            title :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return 'Memory<br>Lv ' + formatWhole(player.Ain.Clickables_3[18][1]) + '<br>-----------'
-            },
-            display :  function()
-            {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                Description = '<h3>Ain Layer no longer consumes</h3>'
-                Price = '<h3>' + format(player.Ain.Clickables_3[18][3]) + '<br>(' + format(player.Ain.Clickables_3[18][4].div(player.Ain.Clickables_3[18][3]).mul(100)) + '%)'
-                return Description + '<br><h2>-----------</h2><br>' + Price
-            },
-            tooltip :  function()
-            {
-                if(player.Ain.Clickables_3[18][1].eq(0)) return 'Effect: None'
-                if(player.Ain.Clickables_3[18][1].eq(1)) return 'Effect: Ain Layer No.1 won\'t consume'
-                if(player.Ain.Clickables_3[18][1].eq(2)) return 'Effect: Ain Layer No.1,2 won\'t consume'
-                if(player.Ain.Clickables_3[18][1].gt(2)) return 'Effect: Ain Layer No.1~' + formatWhole(player.Ain.Clickables_3[18][1]) + ' won\'t consume'
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A6</p>' 
             },
             canClick :  function()
             {
-                if(player.Ain.Clickables_3[6][1].lte(0)) return false
-                if(player.Ain.Clickables_3[18][1].gte(8)) return false
-                if(player.Ain.Clickables_3[18][5] == 0) return player.Ain.Deep_Research_Number[1] <  player.Ain.Deep_Research_Number[2]
-                if(player.Ain.Clickables_3[18][5] == 1) return player.Ain.Deep_Research_Number[1] <= player.Ain.Deep_Research_Number[2]
+                return true
             },
             onClick :  function()
             {
-                switch(player.Ain.Clickables_3[18][5])
+                switch(player.Ain.Clickables_3[6][6])
                 {
                     case 0:
                     {
-                        player.Ain.Clickables_3[18][5]      = 1
-                        player.Ain.Deep_Research_Number[1] += 1
-                        break;
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[6][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
                     }
                     case 1:
                     {
-                        player.Ain.Clickables_3[18][5]      = 0
-                        player.Ain.Deep_Research_Number[1] -= 1
-
-                        break;
+                        player.Ain.Clickables_3[6][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
                     }
                 }
             },
-            branches : function()
-            {
-                if(player.Ain.Clickables_3[6][1].gte(1)) return [36]
-            },
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[18][4].div(player.Ain.Clickables_3[18][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                Style['width']            = '150px'
-                Style['height']           = '150px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
-                {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
-                }
-                if(player.Ain.Clickables_3[18][5] == 1)
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[6][6] == 1)
                 {
                     Style['border']       = '2px solid yellow'
                 }
-                if(player.Ain.Clickables_3[6][1].lte(0))
-                {
-                    Style['opacity']      = '0'
-                }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '97'
                 return Style
             }
         },
-        319:
+        47:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A7</p>' 
             },
-            branches : [39],
+            canClick :  function()
+            {
+                return true
+            },
+            onClick :  function()
+            {
+                switch(player.Ain.Clickables_3[7][6])
+                {
+                    case 0:
+                    {
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[7][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
+                    }
+                    case 1:
+                    {
+                        player.Ain.Clickables_3[7][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
+                    }
+                }
+            },
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[7][6] == 1)
                 {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
+                    Style['border']       = '2px solid yellow'
                 }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '96'
                 return Style
             }
         },
-        320:
+        48:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A8</p>' 
             },
-            branches : [312],
+            canClick :  function()
+            {
+                return true
+            },
+            onClick :  function()
+            {
+                switch(player.Ain.Clickables_3[8][6])
+                {
+                    case 0:
+                    {
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[8][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
+                    }
+                    case 1:
+                    {
+                        player.Ain.Clickables_3[8][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
+                    }
+                }
+            },
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[8][6] == 1)
                 {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
+                    Style['border']       = '2px solid yellow'
                 }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '99'
                 return Style
             }
         },
-        321:
+        49:
         {
             title :  function()
             {
-                if(player.Ain.MiniTab3_Shrink == 1) return ''
-                return ''
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A9</p>' 
             },
-            branches : [315],
+            canClick :  function()
+            {
+                return true
+            },
+            onClick :  function()
+            {
+                switch(player.Ain.Clickables_3[9][6])
+                {
+                    case 0:
+                    {
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[9][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
+                    }
+                    case 1:
+                    {
+                        player.Ain.Clickables_3[9][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
+                    }
+                }
+            },
             style :  function()
             {
-                Percent = player.Ain.Clickables_3[5][4].div(player.Ain.Clickables_3[5][3]).mul(100)
                 Style = {}
-                Style['background']       = 'linear-gradient(to bottom, #444444 ' + Percent + '%, #000000 ' + Percent + '%)'
-                if(player.Ain.Clickables_3[5][4].eq(0)) Style['background'] = '#000000'
-                Style['width']            = '170px'
-                Style['height']           = '170px'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                if(player.Ain.MiniTab3_Shrink == 1)
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[9][6] == 1)
                 {
-                    Style['width']            = '30px'
-                    Style['height']           = '30px'
+                    Style['border']       = '2px solid yellow'
                 }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '98'
                 return Style
             }
         },
-
+        410:
+        {
+            title :  function()
+            {
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A10</p>' 
+            },
+            canClick :  function()
+            {
+                return true
+            },
+            onClick :  function()
+            {
+                switch(player.Ain.Clickables_3[10][6])
+                {
+                    case 0:
+                    {
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[10][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
+                    }
+                    case 1:
+                    {
+                        player.Ain.Clickables_3[10][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
+                    }
+                }
+            },
+            style :  function()
+            {
+                Style = {}
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[10][6] == 1)
+                {
+                    Style['border']       = '2px solid yellow'
+                }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '97'
+                return Style
+            }
+        },
+        411:
+        {
+            title :  function()
+            {
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A11</p>' 
+            },
+            canClick :  function()
+            {
+                return true
+            },
+            onClick :  function()
+            {
+                switch(player.Ain.Clickables_3[11][6])
+                {
+                    case 0:
+                    {
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[11][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
+                    }
+                    case 1:
+                    {
+                        player.Ain.Clickables_3[11][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
+                    }
+                }
+            },
+            style :  function()
+            {
+                Style = {}
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[11][6] == 1)
+                {
+                    Style['border']       = '2px solid yellow'
+                }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '98'
+                return Style
+            }
+        },
+        412:
+        {
+            title :  function()
+            {
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A12</p>' 
+            },
+            canClick :  function()
+            {
+                return true
+            },
+            onClick :  function()
+            {
+                switch(player.Ain.Clickables_3[12][6])
+                {
+                    case 0:
+                    {
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[12][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
+                    }
+                    case 1:
+                    {
+                        player.Ain.Clickables_3[12][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
+                    }
+                }
+            },
+            style :  function()
+            {
+                Style = {}
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[12][6] == 1)
+                {
+                    Style['border']       = '2px solid yellow'
+                }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '97'
+                return Style
+            }
+        },
+        413:
+        {
+            title :  function()
+            {
+                return '<p style="transform:rotate(-45deg) translate(-5px,5px) scale(1.5,1.5)">A13</p>' 
+            },
+            canClick :  function()
+            {
+                return true
+            },
+            onClick :  function()
+            {
+                switch(player.Ain.Clickables_3[13][6])
+                {
+                    case 0:
+                    {
+                        for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
+                        {
+                            player.Ain.Clickables_3[I][6] = 0
+                        }
+                        player.Ain.Clickables_3[13][6] = 1
+                        player.Ain.Deep_Research_Researching = 1
+                        break
+                    }
+                    case 1:
+                    {
+                        player.Ain.Clickables_3[13][6] = 0
+                        player.Ain.Deep_Research_Researching = 0
+                    }
+                }
+            },
+            style :  function()
+            {
+                Style = {}
+                Style['width']            = '50px'
+                Style['height']           = '50px'
+                Style['background-color'] = 'black'
+                Style['border']           = '2px solid #666666'
+                if(player.Ain.Clickables_3[13][6] == 1)
+                {
+                    Style['border']       = '2px solid yellow'
+                }
+                Style['color']            = '#666666'
+                Style['transform-origin'] = 'center'
+                Style['transform']        = 'rotate(45deg)'
+                Style['z-index']          = '96'
+                return Style
+            }
+        },
 
         61:
         {
             title : 'Layer Refactor<br>-------------------------',
             display :  function()
             {
-                Description = '<h3>Get bonuses based on you layers<br>*BUT RESETS LAYERS*</h3>'
+                Description = '<h3>Get bonuses based on your hierarchy<br>*BUT RESETS HIERARCHY<br>AND CLEAR AINS*</h3>'
                 Replace     = '<h2>×' + format(player.Ain.Refactor[1]) + '</h2>'
                 Effect      = '<h2>Current: ×' + format(player.Ain.Refactor[2])
                 return  Description + '<br>' + Replace + '<br><h2>-------------------------</h2><br>' + Effect
@@ -2011,7 +1810,7 @@ addLayer('Ain',
                 Style['background-color'] = 'black'
                 Style['border']           = '2px solid #666666'
                 Style['color']            = '#666666'
-                if(player.Ain.Refactor[1].gt(player.Ain.Refactor[2]))
+                if(player.Ain.Refactor[1].gte(player.Ain.Refactor[2]))
                 {
                     Style['border']           = '2px solid white'
                     Style['color']            = 'white'
@@ -2021,190 +1820,29 @@ addLayer('Ain',
             }
         },
 
-        91:
-        {
-            title : '<h2>M</h2>',
-            tooltip :  function()
-            {
-                return 'Return to middle'
-            },
-            canClick : function()
-            {
-                return true
-            },
-            onClick :  function()
-            {
-                player.Ain.MiniTab3_Row[1]    = 6
-                player.Ain.MiniTab3_Column[1] = 6
-            },
-            style :  function()
-            {
-                Style = {}
-                Style['width']            = '50px'
-                Style['height']           = '50px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                return Style
-            }
-        },
-        92:
-        {
-            title : '<h1>↑</h1>',
-            tooltip :  function()
-            {
-                return 'Move the research tree up'
-            },
-            canClick :  function()
-            {
-                return true
-            },
-            onClick :  function()
-            {
-                if(player.Ain.MiniTab3_Row[1] > player.Ain.MiniTab3_Row[2]) player.Ain.MiniTab3_Row[1] -= 1
-            },
-            style :  function()
-            {
-                Style = {}
-                Style['width']            = '50px'
-                Style['height']           = '50px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                return Style
-            }
-        },
-        93:
-        {
-            title : '<h1>→</h1>',
-            tooltip :  function()
-            {
-                return 'Move the research tree to the right'
-            },
-            canClick :  function()
-            {
-                return true
-            },
-            onClick :  function()
-            {
-                if(player.Ain.MiniTab3_Column[1] < player.Ain.MiniTab3_Column[3]) player.Ain.MiniTab3_Column[1] += 1
-            },
-            style :  function()
-            {
-                Style = {}
-                Style['width']            = '50px'
-                Style['height']           = '50px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                return Style
-            }
-        },
-        94:
-        {
-            title : '<h1>↓</h1>',
-            tooltip :  function()
-            {
-                return 'Move the research tree down'
-            },
-            canClick :  function()
-            {
-                return true
-            },
-            onClick :  function()
-            {
-                if(player.Ain.MiniTab3_Row[1] < player.Ain.MiniTab3_Row[3]) player.Ain.MiniTab3_Row[1] += 1
-            },
-            style :  function()
-            {
-                Style = {}
-                Style['width']            = '50px'
-                Style['height']           = '50px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                return Style
-            }
-        },
-        95:
+        98:
         {
             title : '<h1>←</h1>',
-            tooltip :  function()
-            {
-                return 'Move the research tree up'
-            },
             canClick :  function()
             {
                 return true
             },
             onClick :  function()
             {
-                if(player.Ain.MiniTab3_Column[1] > player.Ain.MiniTab3_Column[2]) player.Ain.MiniTab3_Column[1] -= 1
+                player.Ain.Deep_Research_Category = 0
             },
             style :  function()
             {
                 Style = {}
-                Style['width']            = '50px'
-                Style['height']           = '50px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
+                Style['width']                = '50px'
+                Style['height']               = '50px'
+                Style['background-color']     = 'rgba(0,0,0,0)'
+                Style['border']               = '0px solid #666666'
+                Style['color']                = 'white'
                 return Style
             }
         },
-        96:
-        {
-            title : '<h1>+</h1>',
-            tooltip :  function()
-            {
-                return 'Enlarge the research tree'
-            },
-            canClick :  function()
-            {
-                return true
-            },
-            onClick :  function()
-            {
-                player.Ain.MiniTab3_Shrink = 0
-            },
-            style :  function()
-            {
-                Style = {}
-                Style['width']            = '50px'
-                Style['height']           = '50px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                return Style
-            }
-        },
-        97:
-        {
-            title : '<h1>-</h1>',
-            tooltip :  function()
-            {
-                return 'Shrink the research tree'
-            },
-            canClick :  function()
-            {
-                return true
-            },
-            onClick :  function()
-            {
-                player.Ain.MiniTab3_Shrink = 1
-            },
-            style :  function()
-            {
-                Style = {}
-                Style['width']            = '50px'
-                Style['height']           = '50px'
-                Style['background-color'] = 'black'
-                Style['border']           = '2px solid white'
-                Style['color']            = 'white'
-                return Style
-            }
-        },
-
+        
         99:
         {
             title :  function()
@@ -2280,18 +1918,4 @@ addLayer('Ain',
 //     21   22   23   24   25   26   27
 //                    ↓    ↓
 //                    *61  99
-// ----------------------------------------------------------
-// Column  02  03  04  05  06  07  08  09  10
-//
-// Row                     51
-// 02      58          428-417-418         55
-// 03          \\  415-416-318-41--42  //              92
-// 04          414 \\  317-36--37  //  43          95--91--93
-// 05      427 413 316     32  //  38  44  419         94
-// 06  54--426-321-315-35--31--33--39--319-420-52    96--97
-// 07      425 412 314 //  34  \\  310 45  421
-// 08          411 //  313-312-311 \\  46
-// 09          //  410-49--320-48--47  \\
-// 10      57          424-423-422         56
-//                         53
 // ----------------------------------------------------------
