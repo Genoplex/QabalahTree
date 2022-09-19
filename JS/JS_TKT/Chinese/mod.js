@@ -12,11 +12,35 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: 'ersion a.0.1 Demo',
+	num: 'ersion a.0.0.2-Internal(Demo)',
 	name: '',
 }
 
-let changelog = ``
+let changelog =    `<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <h2>Current Version</h2><br>
+                    <br>
+                    <h1>A.0.0.2-Build(Demo)</h1><br><br>
+					Viewing this tab may lead to spoilers<br>
+                    If you want to view the changelog, please scroll down the page<br>
+					(Changelog will only be written when I remember to)
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        <br><br><br><br>
+					<h2>2022-09-19</h2><br>
+					<h2>A.0.0.2-Build(Demo)</h2><br><br>
+					Changes:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br>
+					<li>[Ain] An improved display effect for Deep Research Tab.
+					<li>[Ain] Start filling the contents of Deep Research Tab.
+					    <br><br><br><br><br><br><br><br>
+					<h2>Start ~ 2022-09-18</h2><br>
+					<h2>A.0.0.1-Build(Demo)</h2><br><br>
+					Changes:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<li>[Ain] Depths Tab construction completed.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<li>[Ain] Simple Research Tab construction completed.&nbsp&nbsp&nbsp&nbsp
+					<li>[Ain] Deep Research Tab Frame construction completed.
+					<li>[Ain] Balance and reduce difficulty.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br>
+					<li>[Changelog] Start to write changelog.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br>
+					<li>Bug fixes&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>AUGHHHHHHHHHHHHHHHHHH<br>`
 	
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
