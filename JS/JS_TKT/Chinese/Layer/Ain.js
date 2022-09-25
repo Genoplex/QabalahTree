@@ -389,7 +389,7 @@ addLayer('Ain',
         player.Ain.Refactor[1] = Levels.mul(0.01).mul(player.Ain.Clickables_3[2][3]).add(1)
 
         // Ain 低研究：价格和效果
-        player.Ain.Clickables_2[1][2] = player.Ain.Clickables_2[1][1].add(2.5).log(1.05).sub(5.5568)
+        player.Ain.Clickables_2[1][2] = player.Ain.Clickables_2[1][1].add(2.5).log(1.05).sub(Math.log(2.5)/Math.log(1.05)).add(1)
         player.Ain.Clickables_2[1][3] = new Decimal(Math.E).pow(player.Ain.Clickables_2[1][1].pow(1.25)).mul(2500)
         player.Ain.Clickables_2[2][2] = new Decimal(2     ).sub(new Decimal(1).div(new Decimal(1.1).pow(player.Ain.Clickables_2[2][1])))
         player.Ain.Clickables_2[2][3] = new Decimal(Math.E).pow(player.Ain.Clickables_2[2][1].pow(1.5)).mul(1000)
