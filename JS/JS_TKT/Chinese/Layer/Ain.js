@@ -102,6 +102,17 @@ addLayer('Ain',
                 ['microtabs','Tab1',{'border-color':'#0f0f0f'}],
             ]         
         },
+        'Information':
+        {
+            unlocked :  function()
+            {
+                return true
+            },
+            content :
+            [
+                
+            ]
+        }
     },
 
     microtabs:
@@ -193,39 +204,39 @@ addLayer('Ain',
                                                                    ['column',,{'height':'550px'}]],{}],
                                                         ['column',[['column',[['column',,{'height':'20px'}],
                                                                               ['display-text','<h1>Category - Aleph']],{'height':'50px'}],
-                                                                   ['row',[['column',[['column',,{'height':'5px','z-index':'-1'}],
+                                                                   ['row',[['column',[['column',,{'height':'5px'}],
                                                                                       ['column',[['clickable',44]],{'width':'34px'}],
-                                                                                      ['column',,{'height':'154px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'154px'}],
                                                                                       ['column',[['clickable',47]],{'width':'34px'}],
                                                                                       ['column',,{'height':'0px'}]],{}],
-                                                                           ['column',[['column',,{'height':'48px','z-index':'-1'}],
+                                                                           ['column',[['column',,{'height':'48px'}],
                                                                                       ['column',[['clickable',43]],{'width':'34px'}],
-                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'18px'}],
                                                                                       ['column',[['clickable',45]],{'width':'34px'}],
-                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'18px'}],
                                                                                       ['column',[['clickable',46]],{'width':'34px','transform':'translate(-25px,-25px)'}],
-                                                                                      ['column',,{'height':'43px','z-index':'-1'}]],{}],
-                                                                           ['column',[['column',,{'height':'96px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'43px'}]],{}],
+                                                                           ['column',[['column',,{'height':'96px'}],
                                                                                       ['column',[['clickable',42]],{'width':'34px'}],
-                                                                                      ['column',,{'height':'160px','z-index':'-1'}],],{}],
-                                                                           ['column',[['column',,{'height':'144px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'160px'}],],{}],
+                                                                           ['column',[['column',,{'height':'144px'}],
                                                                                       ['column',[['clickable',41]],{'width':'34px'}],
-                                                                                      ['column',,{'height':'140px','z-index':'-1'}]],{}],
-                                                                           ['column',[['column',,{'height':'192px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'140px'}]],{}],
+                                                                           ['column',[['column',,{'height':'192px'}],
                                                                                       ['column',[['clickable',48]],{'width':'34px'}],
-                                                                                      ['column',,{'height':'120px','z-index':'-1'}]],{}],
-                                                                           ['column',[['column',,{'height':'122px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'120px'}]],{}],
+                                                                           ['column',[['column',,{'height':'122px'}],
                                                                                       ['column',[['clickable',412]],{'width':'34px','transform':'translate(25px,25px)'}],
-                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'18px'}],
                                                                                       ['column',[['clickable',411]],{'width':'34px'}],
-                                                                                      ['column',,{'height':'18px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'18px'}],
                                                                                       ['column',[['clickable',49]],{'width':'34px'}],
                                                                                       ['column',,{'height':'118px'}]],{}],
-                                                                           ['column',[['column',,{'height':'84px','z-index':'-1'}],
+                                                                           ['column',[['column',,{'height':'84px'}],
                                                                                       ['column',[['clickable',413]],{'width':'49px'}],
-                                                                                      ['column',,{'height':'154px','z-index':'-1'}],
+                                                                                      ['column',,{'height':'154px'}],
                                                                                       ['column',[['clickable',410]],{'width':'49px'}],
-                                                                                      ['column',,{'height':'80px','z-index':'-1'}]],{}]],                        
+                                                                                      ['column',,{'height':'80px'}]],{}]],                        
                                                                    {'height':'500px'}],
                                                                   ['column',[['milestone','1']],{'height':'50px'}]],              
                                                         {'width':'500px'}],
@@ -340,7 +351,12 @@ addLayer('Ain',
         }
 
         // Ain 高研究：研究上限数量部分
-        player.Ain.Clickables_3[1][1] = -1
+        player.Ain.Clickables_3[1][1]  = -1
+        player.Ain.Clickables_3[2][1]  = -1
+        player.Ain.Clickables_3[5][1]  = -1
+        player.Ain.Clickables_3[6][1]  = 1
+        player.Ain.Clickables_3[8][1]  = -1
+        player.Ain.Clickables_3[11][1] = -1
         player.Ain.Clickables_3[13][1] = 1
 
         // Ain 高研究：价格和效果部分
@@ -348,8 +364,13 @@ addLayer('Ain',
         player.Ain.Clickables_3[1][4]   = new Decimal(100    ).mul(new Decimal(1.5 ).pow(player.Ain.Clickables_3[1][2].add(1)))
         player.Ain.Clickables_3[2][3]   = new Decimal(0.125  ).mul(player.Ain.Clickables_3[2][2]).add(1)
         player.Ain.Clickables_3[2][4]   = new Decimal(Math.E ).pow(new Decimal(0.25).mul(player.Ain.Clickables_3[2][2].add(4))).sub(Math.E).add(1).mul(1000)
+        player.Ain.Clickables_3[5][3]   = new Decimal(0.0025 ).sub(new Decimal(1).div(player.Ain.Clickables_3[5][2].add(400))).div(0.0025)
+        player.Ain.Clickables_3[6][4]   = new Decimal(1000000)
+        player.Ain.Clickables_3[5][4]   = new Decimal(2      ).pow(player.Ain.Clickables_3[5][2]).mul(7500)
         player.Ain.Clickables_3[8][3]   = new Decimal(0.025  ).mul(player.Ain.Clickables_3[8][2]).add(1)
         player.Ain.Clickables_3[8][4]   = new Decimal(100    ).mul(new Decimal(1.05).pow(player.Ain.Clickables_3[8][2]))
+        player.Ain.Clickables_3[11][3]  = new Decimal(10     ).mul(player.Ain.Clickables_3[11][2])
+        player.Ain.Clickables_3[11][4]  = new Decimal(3      ).pow(new Decimal(0.5).mul(player.Ain.Clickables_3[11][2])).mul(10000)
         player.Ain.Clickables_3[13][4]  = new Decimal(1000000)
         
         // Refactor：新效果计算部分
@@ -358,6 +379,12 @@ addLayer('Ain',
         for (var I=1; I<=8; I++)
         {
             Levels = Levels.add(player.Ain.Clickables_1[I][1].mul(new Decimal(I).pow(4)))
+        }
+        if(player.Ain.Clickables_3[6][2].gte(1))
+        {
+            Levels = Levels.add(player.Ain.Clickables_2[1][1].mul(200))
+            Levels = Levels.add(player.Ain.Clickables_2[2][1].mul(200))
+            Levels = Levels.add(player.Ain.Clickables_2[3][1].mul(10))
         }
         player.Ain.Refactor[1] = Levels.mul(0.01).mul(player.Ain.Clickables_3[2][3]).add(1)
 
@@ -425,22 +452,50 @@ addLayer('Ain',
         player.Ain.points   = player.Ain.points.add((player.Ain.Point_Gain_Total).mul(diff))
 
         // 计算研究：强度部分
-        if(player.Ain.points.gte(0)) player.Ain.Deep_Research_Power = player.Ain.Deep_Research_Inject.add(1).log(2).mul(player.Ain.Clickables_3[8][3])
+        if(player.Ain.points.gte(0))                                          player.Ain.Deep_Research_Power = player.Ain.Deep_Research_Inject.add(1).log(2)
         else player.Ain.Deep_Research_Power = new Decimal(0)
-        if(player.Ain.points.gte(0)) player.Ain.Deep_Research_Gain  = player.Ain.points.add(player.Ain.Deep_Research_Inject).add(1).log(2).mul(player.Ain.Clickables_3[8][3]).sub(player.Ain.Deep_Research_Power)
+        if(player.Ain.Clickables_3[8][3].gte(1))                              player.Ain.Deep_Research_Power = player.Ain.Deep_Research_Power.mul(player.Ain.Clickables_3[8][3])
+        if(player.Ain.Clickables_3[5][3].mul(player.Ain.Refactor[2]).gte(1))  player.Ain.Deep_Research_Power = player.Ain.Deep_Research_Power.mul(player.Ain.Clickables_3[5][3].mul(player.Ain.Refactor[2]))
+
+        if(player.Ain.points.gte(0))                                          player.Ain.Deep_Research_Gain  = player.Ain.points.add(player.Ain.Deep_Research_Inject).add(1).log(2)
         else player.Ain.Deep_Research_Gain = new Decimal(0)
+        if(player.Ain.Clickables_3[8][3].gte(1))                              player.Ain.Deep_Research_Gain = player.Ain.Deep_Research_Gain.mul(player.Ain.Clickables_3[8][3])
+        if(player.Ain.Clickables_3[5][3].mul(player.Ain.Refactor[2]).gte(1))  player.Ain.Deep_Research_Gain = player.Ain.Deep_Research_Gain.mul(player.Ain.Clickables_3[5][3].mul(player.Ain.Refactor[2]))
+                                                                              player.Ain.Deep_Research_Gain = player.Ain.Deep_Research_Gain.sub(player.Ain.Deep_Research_Power)
         if(player.Ain.Deep_Research_Gain.lt(0)) player.Ain.Deep_Research_Gain = new Decimal(0)
 
         // 计算研究：执行研究部分
         for(var I=1; I<player.Ain.Clickables_3.length-1; I++)
         {
-            if(player.Ain.Clickables_3[I][6] == 1)
+            if(player.Ain.Clickables_3[I][1] == -1)
             {
-                player.Ain.Clickables_3[I][5] = player.Ain.Clickables_3[I][5].add(player.Ain.Deep_Research_Power.mul(diff))
-                if(player.Ain.Clickables_3[I][5].gte(player.Ain.Clickables_3[I][4]))
+                if(player.Ain.Clickables_3[I][6] == 1)
                 {
-                    player.Ain.Clickables_3[I][2] = player.Ain.Clickables_3[I][2].add(1)
-                    player.Ain.Clickables_3[I][5] = new Decimal(0)
+                    player.Ain.Clickables_3[I][5] = player.Ain.Clickables_3[I][5].add(player.Ain.Deep_Research_Power.mul(diff))
+                    if(player.Ain.Clickables_3[I][5].gte(player.Ain.Clickables_3[I][4]))
+                    {
+                        player.Ain.Clickables_3[I][2] = player.Ain.Clickables_3[I][2].add(1)
+                        player.Ain.Clickables_3[I][5] = new Decimal(0)
+                    }
+                }
+            }
+            if(player.Ain.Clickables_3[I][1]>0)
+            {
+                if(player.Ain.Clickables_3[I][6] == 1)
+                {
+                    if(player.Ain.Clickables_3[I][2].gte(player.Ain.Clickables_3[I][1]))
+                    {
+                        player.Ain.Clickables_3[I][6] = 0
+                    }
+                    else
+                    {
+                        player.Ain.Clickables_3[I][5] = player.Ain.Clickables_3[I][5].add(player.Ain.Deep_Research_Power.mul(diff))
+                        if(player.Ain.Clickables_3[I][5].gte(player.Ain.Clickables_3[I][4]))
+                        {
+                            player.Ain.Clickables_3[I][2] = player.Ain.Clickables_3[I][2].add(1)
+                            player.Ain.Clickables_3[I][5] = new Decimal(0)
+                        }
+                    }
                 }
             }
         }
@@ -523,9 +578,9 @@ addLayer('Ain',
                       ;break
             case 14:  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A4]</p><br><h1>Depth Effect</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[4][2]) + '/' + '0' + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Depth of Ain Hierarchy increase its production<br>'
                       ;break
-            case 15:  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A5]'
+            case 15:  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A5]</p><br><h1>Knowledge Framework Reconstruction</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[5][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>[Refactor] will multiply RP by percentage<br><br>×' + format(player.Ain.Refactor[2]) + '<br>×' + format(player.Ain.Clickables_3[5][3].mul(100)) + '%<br>------------<br>≈ ×' + format(player.Ain.Clickables_3[5][3].mul(player.Ain.Refactor[2])) + '</h2><br>'
                       ;break
-            case 16:  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A6]</p><br><h1>Enlarge refactor<br>range</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[6][2]) + '/' + '0' + '</h2><br><br>Finite Research<br><h1>--------------</h1><h2>[Refactor]<br>will also<br>calculate the<br>level of<br>[Ain Obtain]<br>[Ain Guide]<br>[Knowledge]<br>'
+            case 16:  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A6]</p><br><h1>Enlarge refactor<br>range</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[6][2]) + '/' + formatWhole(player.Ain.Clickables_3[6][1]) + '</h2><br>Finite Research<br><h1>--------------</h1><h2>[Refactor]<br>will also include the three buyables in Simple Research'
                       ;break
             case 17:  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A7]</p><br><h1>Analyse</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[4][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Unlock new<br>features<br>'
                       ;break
@@ -533,9 +588,9 @@ addLayer('Ain',
                       ;break
             case 19:  player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A9]'
                       ;break
-            case 110: player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A10]</p><br><h1>Abyss</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[13][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Unlock new<br>features<br>'
+            case 110: player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A10]</p><br><h1>Abyss</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[10][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Unlock new<br>features<br>'
                       ;break
-            case 111: player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A11]'
+            case 111: player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A11]</p><br><h1>Summary</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[11][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>Increase the max level of<br>[Knowledge]<br><br>+' + formatWhole(player.Ain.Clickables_3[11][3]) + '</h2><br>'
                       ;break
             case 112: player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A12]</p><br><h1>Research Bonus</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[2][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>The total level of A1 A2 A5 A8 A11 power the Ain gain<br><br>^' + format(player.Ain.Clickables_3[2][3]) + '</h2><br>'
                       ;break
@@ -547,13 +602,13 @@ addLayer('Ain',
                 if(player.Ain.Clickables_3[2][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A2]</p><br><h1>Refactor EX</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[2][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>Multiply<br>[Refactor] Effect<br><br>×' + format(player.Ain.Clickables_3[2][3]) + '</h2><br>'
                 if(player.Ain.Clickables_3[3][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A3]</p><br><h1>Dissociation</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[3][2]) + '/' + '0' + '</h2><br><br>Finite Research<br><h1>--------------</h1><h2>The time spent<br>will multiply<br>Ain gain<br><br>(Only start time counting when this research is done)<br><br>'
                 if(player.Ain.Clickables_3[4][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A4]</p><br><h1>Depth Effect</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[4][2]) + '/' + '0' + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Depth of Ain Hierarchy increase its production<br>'
-                if(player.Ain.Clickables_3[5][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A5]'
-                if(player.Ain.Clickables_3[6][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A6]</p><br><h1>Enlarge refactor<br>range</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[6][2]) + '/' + '0' + '</h2><br><br>Finite Research<br><h1>--------------</h1><h2>[Refactor]<br>will also<br>calculate the<br>level of<br>[Ain Obtain]<br>[Ain Guide]<br>[Knowledge]<br>'
+                if(player.Ain.Clickables_3[5][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A5]</p><br><h1>Knowledge Framework Reconstruction</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[5][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>[Refactor] will multiply RP by percentage<br><br>×' + format(player.Ain.Refactor[2]) + '<br>×' + format(player.Ain.Clickables_3[5][3].mul(100)) + '%<br>------------<br>≈ ×' + format(player.Ain.Clickables_3[5][3].mul(player.Ain.Refactor[2])) + '</h2><br>'
+                if(player.Ain.Clickables_3[6][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A6]</p><br><h1>Enlarge refactor<br>range</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[6][2]) + '/' + formatWhole(player.Ain.Clickables_3[6][1]) + '</h2><br>Finite Research<br><h1>--------------</h1><h2>[Refactor]<br>will also<br>calculate the<br>level of<br>[Ain Obtain]<br>[Ain Guide]<br>[Knowledge]<br>'
                 if(player.Ain.Clickables_3[7][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A7]</p><br><h1>Analyse</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[4][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Unlock new<br>features<br>'
                 if(player.Ain.Clickables_3[8][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A8]</p><br><h1>Note</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[8][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>Multiply RP production<br><br>×' + format(player.Ain.Clickables_3[8][3]) + '</h2><br>'
                 if(player.Ain.Clickables_3[9][6]  == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A9]'
                 if(player.Ain.Clickables_3[10][6] == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A10]</p><br><h1>Abyss</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[13][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>Unlock new<br>features<br>'
-                if(player.Ain.Clickables_3[11][6] == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A11]'
+                if(player.Ain.Clickables_3[11][6] == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A11]</p><br><h1>Summary</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[11][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>Increase the max level of<br>[Knowledge]<br><br>+' + formatWhole(player.Ain.Clickables_3[11][3]) + '</h2><br>'
                 if(player.Ain.Clickables_3[12][6] == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A12]</p><br><h1>Research Bonus</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[2][2]) + '</h2><br>Recycling Research<br><h1>--------------</h1><h2>The total level of A1 A2 A5 A8 A11 power the Ain gain<br><br>^' + format(player.Ain.Clickables_3[2][3]) + '</h2><br>'
                 if(player.Ain.Clickables_3[13][6] == 1) player.Ain.Deep_Research_Text = '<p style="transform:scale(2,2)">[A13]</p><br><h1>Resting?<br>No Allowed!</h1><br><br><h2>Lv. ' + formatWhole(player.Ain.Clickables_3[13][2]) + '/' + formatWhole(player.Ain.Clickables_3[13][1]) + '<br></h2>Finite Research<br><h1>--------------</h1><h2>RP will multiply<br>Ain production if not researching<br><br>×' + format(player.Ain.Clickables_3[13][3]) + '</h2><br>'
             };
@@ -603,18 +658,26 @@ addLayer('Ain',
             {
                 switch(player.Ain.Deep_Research_Text.substring(33,36))
                 {
-                    case 'A1]' : return player.Ain.Clickables_3[1][5].div(player.Ain.Clickables_3[1][4]) ;break
-                    case 'A2]' : return player.Ain.Clickables_3[2][5].div(player.Ain.Clickables_3[2][4]) ;break
-                    case 'A8]' : return player.Ain.Clickables_3[8][5].div(player.Ain.Clickables_3[8][4]) ;break
+                    case 'A1]' : return player.Ain.Clickables_3[1][5].div(player.Ain.Clickables_3[1][4])   ;break
+                    case 'A2]' : return player.Ain.Clickables_3[2][5].div(player.Ain.Clickables_3[2][4])   ;break
+                    case 'A5]' : return player.Ain.Clickables_3[5][5].div(player.Ain.Clickables_3[5][4])   ;break
+                    case 'A6]' : if(player.Ain.Clickables_3[6][2].lt(player.Ain.Clickables_3[6][1])) { return player.Ain.Clickables_3[6][5].div(player.Ain.Clickables_3[6][4]) }
+                                 else                                                                { return 100 } ;break
+                    case 'A8]' : return player.Ain.Clickables_3[8][5].div(player.Ain.Clickables_3[8][4])   ;break
+                    case 'A11' : return player.Ain.Clickables_3[11][5].div(player.Ain.Clickables_3[11][4]) ;break
                 }
             },
             display : function()
             {
                 switch(player.Ain.Deep_Research_Text.substring(33,36))
                 {
-                    case 'A1]' : return format(player.Ain.Clickables_3[1][5]) + ' / ' + format(player.Ain.Clickables_3[1][4]) ;break
-                    case 'A2]' : return format(player.Ain.Clickables_3[2][5]) + ' / ' + format(player.Ain.Clickables_3[2][4]) ;break
-                    case 'A8]' : return format(player.Ain.Clickables_3[8][5]) + ' / ' + format(player.Ain.Clickables_3[8][4]) ;break
+                    case 'A1]' : return format(player.Ain.Clickables_3[1][5])  + ' / ' + format(player.Ain.Clickables_3[1][4])  ;break
+                    case 'A2]' : return format(player.Ain.Clickables_3[2][5])  + ' / ' + format(player.Ain.Clickables_3[2][4])  ;break
+                    case 'A5]' : return format(player.Ain.Clickables_3[5][5])  + ' / ' + format(player.Ain.Clickables_3[5][4])  ;break
+                    case 'A6]' : if(player.Ain.Clickables_3[6][2].lt(player.Ain.Clickables_3[6][1])) { return format(player.Ain.Clickables_3[6][5])  + ' / ' + format(player.Ain.Clickables_3[6][4]) }
+                                 else                                                                { return 'Completed' } ;break
+                    case 'A8]' : return format(player.Ain.Clickables_3[8][5])  + ' / ' + format(player.Ain.Clickables_3[8][4])  ;break
+                    case 'A11' : return format(player.Ain.Clickables_3[11][5]) + ' / ' + format(player.Ain.Clickables_3[11][4]) ;break
                 }
             },
             unlocked: true,
@@ -1020,13 +1083,13 @@ addLayer('Ain',
                 Description = '<h3>Reduce Hierarchy Price</h3>'
                 Effect      = '<h2>÷' + format(new Decimal(1).div(player.Ain.Clickables_2[3][2])) + '</h2>'
                 Price       = '<h2>' + format(player.Ain.Clickables_2[3][3]) + ' Ain</h2>'
-                if(player.Ain.Clickables_2[3][1].gte(400)) Price = '<h2>Can\'t get more yet</h2>'
+                if(player.Ain.Clickables_2[3][1].gte(new Decimal(400).add(player.Ain.Clickables_3[11][3]))) Price = '<h2>Can\'t get more yet</h2>'
                 return Description + '<br>' + Effect + '<br><h2>----------------</h2><br>' + Price
             },
             branches : [21,22],
             canClick :  function()
             {
-                return player.Ain.points.gte(player.Ain.Clickables_2[3][3])&&player.Ain.Clickables_2[3][1].lt(400)
+                return player.Ain.points.gte(player.Ain.Clickables_2[3][3])&&player.Ain.Clickables_2[3][1].lt(new Decimal(400).add(player.Ain.Clickables_3[11][3]))
             },
             onClick :  function()
             {
@@ -1046,7 +1109,7 @@ addLayer('Ain',
                 Style['background-color'] = 'black'
                 Style['border']           = '2px solid #666666'
                 Style['color']            = '#666666'
-                if(player.Ain.Clickables_2[3][1].gte(400))
+                if(player.Ain.Clickables_2[3][1].gte(new Decimal(400).add(player.Ain.Clickables_3[11][3])))
                 {
                     Style['border']           = '2px solid white'
                     Style['color']            = 'white'
@@ -1502,14 +1565,20 @@ addLayer('Ain',
                 Style['height']           = '50px'
                 Style['background-color'] = 'black'
                 Style['border']           = '2px solid #666666'
-                if(player.Ain.Clickables_3[5][6] == 1)
-                {
-                    Style['border']       = '2px solid yellow'
-                }
                 Style['color']            = '#666666'
                 Style['transform-origin'] = 'center'
                 Style['transform']        = 'rotate(45deg)'
-                Style['z-index']          = '98'
+                Style['z-index']          = '0'
+                if(player.Ain.Clickables_3[2][2].gt(0))
+                {
+                    Style['border']           = '2px solid white'
+                    Style['color']            = 'white'
+                }
+                if(player.Ain.Clickables_3[5][6] == 1)
+                {
+                    Style['border']       = '2px solid yellow'
+                    Style['z-index']          = '200'
+                }
                 return Style
             }
         },
@@ -1521,6 +1590,10 @@ addLayer('Ain',
             },
             canClick :  function()
             {
+                if(player.Ain.Clickables_3[6][2].gte(player.Ain.Clickables_3[6][1]))
+                {
+                    return false
+                }
                 return true
             },
             onClick :  function()
@@ -1551,14 +1624,24 @@ addLayer('Ain',
                 Style['height']           = '50px'
                 Style['background-color'] = 'black'
                 Style['border']           = '2px solid #666666'
-                if(player.Ain.Clickables_3[6][6] == 1)
-                {
-                    Style['border']       = '2px solid yellow'
-                }
                 Style['color']            = '#666666'
                 Style['transform-origin'] = 'center'
                 Style['transform']        = 'rotate(45deg)'
-                Style['z-index']          = '97'
+                Style['z-index']          = '50'
+                if(player.Ain.Clickables_3[5][2].gt(0))
+                {
+                    Style['border']           = '2px solid white'
+                    Style['color']            = 'white'
+                }
+                if(player.Ain.Clickables_3[6][6] == 1)
+                {
+                    Style['border']       = '2px solid yellow'
+                    Style['z-index']      = '200'
+                }
+                if(player.Ain.Clickables_3[6][2].gte(player.Ain.Clickables_3[6][1]))
+                {
+                    Style['background-color'] = '#006600'
+                }
                 return Style
             }
         },
@@ -1607,7 +1690,6 @@ addLayer('Ain',
                 Style['color']            = '#666666'
                 Style['transform-origin'] = 'center'
                 Style['transform']        = 'rotate(45deg)'
-                Style['z-index']          = '96'
                 return Style
             }
         },
@@ -1802,14 +1884,20 @@ addLayer('Ain',
                 Style['height']           = '50px'
                 Style['background-color'] = 'black'
                 Style['border']           = '2px solid #666666'
-                if(player.Ain.Clickables_3[11][6] == 1)
-                {
-                    Style['border']       = '2px solid yellow'
-                }
                 Style['color']            = '#666666'
                 Style['transform-origin'] = 'center'
                 Style['transform']        = 'rotate(45deg)'
                 Style['z-index']          = '98'
+                if(player.Ain.Clickables_3[8][2].gte(1))
+                {
+                    Style['border']           = '2px solid white'
+                    Style['color']            = 'white'
+                }
+                if(player.Ain.Clickables_3[11][6] == 1)
+                {
+                    Style['border']       = '2px solid yellow'
+                    Style['z-index']      = '200'
+                }
                 return Style
             }
         },
@@ -1917,10 +2005,20 @@ addLayer('Ain',
             title : 'Layer Refactor<br>-------------------------',
             display :  function()
             {
-                Description = '<h3>Get bonuses based on your hierarchy<br>*BUT RESETS HIERARCHY<br>AND CLEAR AINS*</h3>'
-                Replace     = '<h2>×' + format(player.Ain.Refactor[1]) + '</h2>'
-                Effect      = '<h2>Current: ×' + format(player.Ain.Refactor[2])
-                return  Description + '<br>' + Replace + '<br><h2>-------------------------</h2><br>' + Effect
+                if(player.Ain.Clickables_3[6][2].lt(1))
+                {
+                    Description = '<h3>Get bonuses based on your hierarchy<br>*BUT RESETS THEM<br><br>AND CLEAR AINS*</h3>'
+                    Replace     = '<h2>×' + format(player.Ain.Refactor[1]) + '</h2>'
+                    Effect      = '<h2>Current: ×' + format(player.Ain.Refactor[2])
+                    return  Description + '<br>' + Replace + '<br><h2>-------------------------</h2><br>' + Effect
+                }
+                else
+                {
+                    Description = '<h3>Get bonuses based on your hierarchy and the three<br>buyables in simple researches<br><br>*BUT RESETS THEM<br>AND CLEAR AINS*</h3>'
+                    Replace     = '<h2>×' + format(player.Ain.Refactor[1]) + '</h2>'
+                    Effect      = '<h2>Current: ×' + format(player.Ain.Refactor[2])
+                    return  Description + '<br>' + Replace + '<br><h2>-------------------------</h2><br>' + Effect
+                }
             },
             unlocked :  function()
             {
@@ -1943,12 +2041,18 @@ addLayer('Ain',
                                                [0, new Decimal(0),new Decimal(0),new Decimal(0)],
                                             ]
                 player.Ain.points       = new Decimal(10)
+                if(player.Ain.Clickables_3[6][2].gte(1))
+                {
+                    player.Ain.Clickables_2[1][1] = new Decimal(0)
+                    player.Ain.Clickables_2[2][1] = new Decimal(0)
+                    player.Ain.Clickables_2[3][1] = new Decimal(0)
+                }
             },
             style :  function()
             {
                 Style = {}
                 Style['width']            = '300px'
-                Style['height']           = '175px'
+                Style['height']           = '200px'
                 Style['background-color'] = 'black'
                 Style['border']           = '2px solid #666666'
                 Style['color']            = '#666666'
