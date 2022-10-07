@@ -223,6 +223,7 @@ function loadOptions() {
 	else 
 		options = getStartOptions()
 	if (themes.indexOf(options.theme) < 0) theme = "default"
+	fixData(options, getStartOptions())
 
 }
 
@@ -258,7 +259,7 @@ function NaNcheck(data) {
 }
 function exportSave() {
 	//if (NaNalert) return
-	let str = "5L2g5bqU6K+l55+l6YGT5aaC5p6c5Lmx5pS55a2Y5qGj5pyJ5Y+v6IO95Lya5a+86Ie05ri45oiP5Ye66ZSZ55qE5ZCn77yf5LiN55+l6YGT77yf546w5Zyo5oiR5ZGK6K+J5L2g5LqG77yM5LiN6KaB5Lmx5pS55L2g55qE5a2Y5qGj77yBCg==A" + btoa(encodeURI(JSON.stringify(player)));
+	let str = btoa(encodeURIComponent(JSON.stringify(player)));
 
 	const el = document.createElement("textarea");
 	el.value = str;
@@ -272,8 +273,7 @@ function importSave(imported = undefined, forced = false) {
 	if (imported === undefined)
 		imported = prompt("Paste your save here");
 	try {
-		imported = imported.substr(185)
-		tempPlr = Object.assign(getStartPlayer(), JSON.parse(decodeURI(atob(imported))));
+		tempPlr = Object.assign(getStartPlayer(), JSON.parse(decodeURIComponent(atob(imported))));
 		if (tempPlr.versionType != modInfo.id && !forced && !confirm("This save appears to be for a different mod! Are you sure you want to import?")) // Wrong save (use "Forced" to force it to accept.)
 			return;
 		player = tempPlr;

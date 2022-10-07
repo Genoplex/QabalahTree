@@ -5,7 +5,7 @@ var systemComponents = {
 			<div class="upgRow">
 				<div v-for="tab in Object.keys(data)">
 					<button v-if="data[tab].unlocked == undefined || data[tab].unlocked" v-bind:class="{tabButton: true, notify: subtabShouldNotify(layer, name, tab), resetNotify: subtabResetNotify(layer, name, tab)}"
-					v-bind:style="[{'border-color': tmp[layer].color}, (subtabShouldNotify(layer, name, tab) ? {'box-shadow': 'var(--hqProperty2a), 0 0 20px '  + data[tab].glowColor || defaultGlow} : {}), tmp[layer].componentStyles['tab-button'], data[tab].buttonStyle]"
+					v-bind:style="[{'border-color': tmp[layer].color}, (subtabShouldNotify(layer, name, tab) ? {'box-shadow': 'var(--hqProperty2a), 0 0 20px '  + (data[tab].glowColor || defaultGlow)} : {}), tmp[layer].componentStyles['tab-button'], data[tab].buttonStyle]"
 						v-on:click="function(){player.subtabs[layer][name] = tab; updateTabFormats(); needCanvasUpdate = true;}">{{tab}}</button>
 				</div>
 			</div>
@@ -18,7 +18,7 @@ var systemComponents = {
 		<button v-if="nodeShown(layer)"
 			v-bind:id="layer"
 			v-on:click="function() {
-				if (shiftDown) player[layer].forceTooltip = !player[layer].forceTooltip
+				if (shiftDown && options.forceTooltips) player[layer].forceTooltip = !player[layer].forceTooltip
 				else if(tmp[layer].isLayer) {
 					if (tmp[layer].leftTab) {
 						showNavTab(layer, prev)
@@ -47,7 +47,7 @@ var systemComponents = {
 				front: !tmp.scrolled,
 			}"
 			v-bind:style="constructNodeStyle(layer)">
-			<span v-html="(abb !== '' && tmp[layer].image === undefined) ? abb : '&nbsp;'"></span>
+			<span class="nodeLabel" v-html="(abb !== '' && tmp[layer].image === undefined) ? abb : '&nbsp;'"></span>
 			<tooltip
       v-if="tmp[layer].tooltip != ''"
 			:text="(tmp[layer].isLayer) ? (
@@ -112,43 +112,38 @@ var systemComponents = {
 			<br>Offline Time: {{formatTime(player.offTime.remain)}}<br>
 		</span>
 		<br>
+		<span v-if="player.points.lt('1e1000')"  class="overlayThing">You have </span>
+		<h2  class="overlayThing" id="points">{{format(player.points)}}</h2>
+		<span v-if="player.points.lt('1e1e6')"  class="overlayThing"> {{modInfo.pointsName}}</span>
+		<br>
+		<span v-if="canGenPoints()"  class="overlayThing">({{tmp.other.oompsMag != 0 ? format(tmp.other.oomps) + " OOM" + (tmp.other.oompsMag < 0 ? "^OOM" : tmp.other.oompsMag > 1 ? "^" + tmp.other.oompsMag : "") + "s" : formatSmall(getPointGen())}}/sec)</span>
 		<div v-for="thing in tmp.displayThings" class="overlayThing"><span v-if="thing" v-html="thing"></span></div>
 	</div>
 	`
     },
 
-	'info-tab': {
+    'info-tab': {
         template: `
         <div>
         <h2>{{modInfo.name}}</h2>
         <br>
         <h3>{{VERSION.withName}}</h3>
         <span v-if="modInfo.author">
-        <br><br>
-        作者： {{modInfo.author}}<br><br>
-	    ／l、 <br> 
-        （ﾟ､ 。 ７<br> 
- 　     l、 ~ヽ  l<br>
-　      じしf_, )ノ<br>​
-        <br>
-        特别鸣谢：{{modInfo.thanks}}
-		<br><br>
+            <br>
+            Made by {{modInfo.author}}	
         </span>
         <br>
-		<br>
-        模组树：<a v-bind:href="'https://github.com/Acamaeda/The-Modding-Tree/blob/master/changelog.md'" target="_blank" class="link" v-bind:style = "{'font-size': '14px', 'display': 'inline'}" >{{TMT_VERSION.tmtNum}}</a> | 作者：Acamaeda
+        The Modding Tree <a v-bind:href="'https://github.com/Acamaeda/The-Modding-Tree/blob/master/changelog.md'" target="_blank" class="link" v-bind:style = "{'font-size': '14px', 'display': 'inline'}" >{{TMT_VERSION.tmtNum}}</a> by Acamaeda
         <br>
-        声望树作者：Jacorb 和 Aarex
-        <br>
-        最初的想法提供：papyrus（Discord）
-		<br><br><br><br>
-		<div class="link" onclick="showTab('changelog-tab')">The World Tree 更新日志</div><br>
-        <span v-if="modInfo.discordLink"><a class="link" v-bind:href="modInfo.discordLink" target="_blank">{{modInfo.discordName}}</a><br></span>
-        <a class="link" href="https://discord.gg/F3xveHV" target="_blank" v-bind:style="modInfo.discordLink ? {'font-size': '16px'} : {}">模组树 Discord</a><br>
-        <a class="link" href="http://discord.gg/wwQfgPa" target="_blank" v-bind:style="{'font-size': '16px'}">声望树 Discord</a><br>
+        The Prestige Tree made by Jacorb and Aarex
 		<br><br>
-        已游玩时间：{{ formatTime(player.timePlayed) }}<br><br><br><br>
-        <h3>快捷键</h3><br>
+		<div class="link" onclick="showTab('changelog-tab')">Changelog</div><br>
+        <span v-if="modInfo.discordLink"><a class="link" v-bind:href="modInfo.discordLink" target="_blank">{{modInfo.discordName}}</a><br></span>
+        <a class="link" href="https://discord.gg/F3xveHV" target="_blank" v-bind:style="modInfo.discordLink ? {'font-size': '16px'} : {}">The Modding Tree Discord</a><br>
+        <a class="link" href="http://discord.gg/wwQfgPa" target="_blank" v-bind:style="{'font-size': '16px'}">Main Prestige Tree server</a><br>
+		<br><br>
+        Time Played: {{ formatTime(player.timePlayed) }}<br><br>
+        <h3>Hotkeys</h3><br>
         <span v-for="key in hotkeys" v-if="player[key.layer].unlocked && tmp[key.layer].hotkeys[key.id].unlocked"><br>{{key.description}}</span></div>
     `
     },
@@ -157,25 +152,25 @@ var systemComponents = {
         template: `
         <table>
             <tr>
-			<td><button class="opt" onclick="save()">保存</button></td>
-			<td><button class="opt" onclick="toggleOpt('autosave')">自动保存：{{ player.autosave?"开启":"关闭" }}</button></td>
-			<td><button class="opt" onclick="hardReset()">完全重置</button></td>
-		</tr>
-		<tr>
-			<td><button class="opt" onclick="exportSave()">导出存档至粘贴板</button></td>
-			<td><button class="opt" onclick="importSave()">导入存档</button></td>
-			<td><button class="opt" onclick="toggleOpt('offlineProd')">显示离线进度：{{ player.offlineProd?"开启":"关闭" }}</button></td>
-		</tr>
-		<tr>
-			<td><button class="opt" onclick="switchTheme()">背景主题：{{ getThemeName() }}</button></td>
-			<td><button class="opt" onclick="adjustMSDisp()">里程碑显示方法：{{ MS_DISPLAYS[MS_SETTINGS.indexOf(player.msDisplay)]}}</button></td>
-			<td><button class="opt" onclick="toggleOpt('hqTree')">高质量树节点显示：{{ player.hqTree?"开启":"关闭" }}</button></td>
-		</tr>
-		<tr>
-			<td><button class="opt" onclick="toggleOpt('hideChallenges')">已完成的挑战：{{ player.hideChallenges?"隐藏":"显示" }}</button></td>
-			<td><button class="opt" onclick="toggleOpt('forceOneTab'); needsCanvasUpdate = true">半页显示模式：{{ player.forceOneTab?"总是":"自动" }}</button></td>
-			<td><button class="opt" onclick="language()">语言：{{ player.language?"中文":"英语"}}</button></td>
-			</tr> 
+                <td><button class="opt" onclick="save()">Save</button></td>
+                <td><button class="opt" onclick="toggleOpt('autosave')">Autosave: {{ options.autosave?"ON":"OFF" }}</button></td>
+                <td><button class="opt" onclick="hardReset()">HARD RESET</button></td>
+            </tr>
+            <tr>
+                <td><button class="opt" onclick="exportSave()">Export to clipboard</button></td>
+                <td><button class="opt" onclick="importSave()">Import</button></td>
+                <td><button class="opt" onclick="toggleOpt('offlineProd')">Offline Prod: {{ options.offlineProd?"ON":"OFF" }}</button></td>
+            </tr>
+            <tr>
+                <td><button class="opt" onclick="switchTheme()">Theme: {{ getThemeName() }}</button></td>
+                <td><button class="opt" onclick="adjustMSDisp()">Show Milestones: {{ MS_DISPLAYS[MS_SETTINGS.indexOf(options.msDisplay)]}}</button></td>
+                <td><button class="opt" onclick="toggleOpt('hqTree')">High-Quality Tree: {{ options.hqTree?"ON":"OFF" }}</button></td>
+            </tr>
+            <tr>
+                <td><button class="opt" onclick="toggleOpt('hideChallenges')">Completed Challenges: {{ options.hideChallenges?"HIDDEN":"SHOWN" }}</button></td>
+                <td><button class="opt" onclick="toggleOpt('forceOneTab'); needsCanvasUpdate = true">Single-Tab Mode: {{ options.forceOneTab?"ALWAYS":"AUTO" }}</button></td>
+				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">Shift-Click to Toggle Tooltips: {{ options.forceTooltips?"ON":"OFF" }}</button></td>
+				</tr> 
         </table>`
     },
 
